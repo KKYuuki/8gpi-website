@@ -1,12 +1,12 @@
 'use client';
 
 import Image from 'next/image';
-import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
+import Navbar from '../../components/Navbar';
+import Footer from '../../components/Footer';
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen flex flex-col">
       <Navbar />
       {/* Section 1: Hero with Background Image */}
       <section 
@@ -21,91 +21,160 @@ export default function AboutPage() {
       >
         <div className="absolute inset-0 bg-black/60 z-0"></div>
         <div className="relative z-10 text-center px-4">
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">About 8GPI</h1>
-          <p className="text-xl md:text-2xl text-gray-200 max-w-3xl mx-auto">
-            Leading the charge in renewable energy solutions for a sustainable future
-          </p>
+          <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">About 8Gen Power Inc.</h1>
+          <h2 className="text-2xl md:text-3xl font-semibold text-green-300 mb-6">Solar PV Solutions</h2>
         </div>
       </section>
 
-      {/* Section 2: Our Story */}
+      {/* Section 2: Write Up with Image */}
       <section className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16">
-            <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
-              Our Story
-            </h2>
-            <div className="mt-2 h-1 w-20 bg-green-600 mx-auto"></div>
-          </div>
-          
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-            <div>
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Pioneering Solar Solutions Since 2015</h3>
-              <p className="text-gray-600 mb-6">
-                8GPI was founded with a vision to transform the energy landscape through innovative solar solutions. 
-                What started as a small team of passionate engineers has grown into a leading provider of renewable 
-                energy systems across the Philippines.
-              </p>
-              <p className="text-gray-600 mb-6">
-                Our commitment to quality, sustainability, and customer satisfaction has helped us complete over 
-                1,000 successful installations, powering homes, businesses, and communities with clean, renewable energy.
-              </p>
-              <div className="flex items-center">
-                <div className="flex-shrink-0 bg-green-100 rounded-full p-3">
-                  <svg className="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                  </svg>
-                </div>
-                <div className="ml-4">
-                  <p className="text-lg font-medium text-gray-900">1,000+</p>
-                  <p className="text-gray-600">Successful Installations</p>
-                </div>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            {/* Image on the left */}
+            <div className="order-1">
+              <div className="relative h-96 w-full rounded-lg overflow-hidden shadow-lg">
+                <Image
+                  src="/images/aboutuspage/WriteUpAboutUs.jpg"
+                  alt="8Gen Power Team"
+                  fill
+                  className="object-cover"
+                />
               </div>
             </div>
-            <div className="rounded-xl overflow-hidden shadow-xl">
-              <Image 
-                src="/images/aboutuspage/our-story.jpg" 
-                alt="Our Story" 
-                width={600} 
-                height={400} 
-                className="w-full h-auto"
+            
+            {/* Write-up on the right */}
+            <div className="order-2">
+              <p className="text-base font-medium text-gray-500 mb-2">Building a Brighter, Greener Future</p>
+              <h2 className="text-3xl font-bold text-gray-900 mb-6">8Gen Power Inc.</h2>
+              <div className="space-y-4 text-gray-600">
+                <p>
+                  8Gen Power Inc. is a full-service solar energy company offering high-quality Solar PV panel supply, professional installation, and ongoing system maintenance. We serve residential, commercial, and industrial clients across Visayas and Mindanao. We are committed to delivering reliable, sustainable, and long term energy solutions.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Divider */}
+      <div className="w-full py-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="h-0.5 bg-black w-full"></div>
+        </div>
+      </div>
+
+      {/* Section 3: Mission & Vision */}
+      <section className="py-16 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-36 text-center">
+            {/* Mission */}
+            <div className="p-4">
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Mission</h3>
+              <p className="text-gray-600">
+                Empowering Filipinos to cut energy costs with clean and innovative solar solutions.
+              </p>
+            </div>
+            
+            {/* Vision */}
+            <div className="p-4">
+              <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Vision</h3>
+              <p className="text-gray-600">
+                A future where every community harnesses solar power efficiently and responsibly.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Section 4: CEAAPI Logo with Green Background */}
+      <section className="py-12" style={{ backgroundColor: '#0E3F29' }}>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h3 className="text-2xl font-bold text-white mb-6">Pioneer Member of the Clean Energy Advocates Association of the Philippines</h3>
+          <div className="flex justify-center">
+            <div className="w-40 h-40 relative">
+              <Image
+                src="/images/aboutuspage/CEAAPILogo.png"
+                alt="CEAAPI Logo"
+                fill
+                className="object-contain"
               />
             </div>
           </div>
         </div>
       </section>
 
-      {/* Section 3: Our Mission & Vision */}
-      <section className="py-20 bg-gray-50">
+      {/* Feature Cards Section */}
+      <section className="py-12 bg-white">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
-            <div className="bg-white p-8 rounded-xl shadow-md">
-              <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-6">
-                <svg className="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
-                </svg>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 justify-items-center">
+            {/* Card 1 */}
+            <div className="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-300" style={{ width: '247px', height: '247px' }}>
+              <div className="h-full flex flex-col items-center justify-center p-6 text-center">
+                <div className="flex justify-center mb-4">
+                  <div className="w-16 h-16 relative">
+                    <Image
+                      src="/images/aboutuspage/handshake.png"
+                      alt="Client Focused Approach"
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900">Client Focused Approach</h3>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Our Mission</h3>
-              <p className="text-gray-600">
-                To provide innovative, reliable, and sustainable solar energy solutions that empower our customers 
-                to reduce their carbon footprint while enjoying significant energy savings.
-              </p>
             </div>
-            
-            <div className="bg-white p-8 rounded-xl shadow-md">
-              <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mb-6">
-                <svg className="h-6 w-6 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                </svg>
+
+            {/* Card 2 */}
+            <div className="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-300" style={{ width: '247px', height: '247px' }}>
+              <div className="h-full flex flex-col items-center justify-center p-6 text-center">
+                <div className="flex justify-center mb-4">
+                  <div className="w-16 h-16 relative">
+                    <Image
+                      src="/images/aboutuspage/energy_savings_leaf.png"
+                      alt="Sustainable Energy Solutions"
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900">Sustainable Energy Solutions</h3>
               </div>
-              <h3 className="text-xl font-bold text-gray-900 mb-4">Our Vision</h3>
-              <p className="text-gray-600">
-                To be the leading force in the Philippines&apos; transition to renewable energy, creating a sustainable 
-                future where clean power is accessible to all communities and businesses.
-              </p>
+            </div>
+
+            {/* Card 3 */}
+            <div className="bg-white rounded-lg shadow-sm overflow-hidden hover:shadow-md transition-shadow duration-300" style={{ width: '247px', height: '247px' }}>
+              <div className="h-full flex flex-col items-center justify-center p-6 text-center">
+                <div className="flex justify-center mb-4">
+                  <div className="w-16 h-16 relative">
+                    <Image
+                      src="/images/aboutuspage/handyman.png"
+                      alt="Professional Installation & Support"
+                      fill
+                      className="object-contain"
+                    />
+                  </div>
+                </div>
+                <h3 className="text-lg font-semibold text-gray-900">Professional Installation & Support</h3>
+              </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="py-16 bg-white">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+          <h2 className="text-3xl font-bold text-gray-900 mb-6">8Gen Power Inc.</h2>
+          <p className="text-xl text-gray-600 mb-8">
+            Electricity Cost Burn! Switch on the Sun.
+          </p>
+          <a
+            href="/contact"
+            className="inline-flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white hover:bg-opacity-90 transition-colors duration-300"
+            style={{ backgroundColor: '#0F7346' }}
+          >
+            Contact Us
+          </a>
         </div>
       </section>
       <Footer />
