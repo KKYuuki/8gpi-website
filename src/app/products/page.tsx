@@ -27,7 +27,8 @@ export default function ProductsPage() {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      <main className="pt-16">
+      <div className="w-1/2 h-px bg-black mt-32 mx-auto"></div>
+      <main className="mt-4">
         {/* Video Section */}
         <div className="bg-white py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

@@ -34,8 +34,8 @@ export default function Contact() {
   return (
     <div className="min-h-screen flex flex-col">
       <Navbar />
-      
-      <div className="flex-grow container mx-auto px-4 pt-24">
+      <div className="w-1/2 h-px bg-black mt-32 mx-auto"></div>
+      <div className="flex-grow container mx-auto px-4 pt-12">
         <div className="max-w-6xl mx-auto">
           <div className="grid md:grid-cols-2 gap-12">
             {/* Left Column - Google Maps and Contact Info */}
