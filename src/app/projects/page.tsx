@@ -5,56 +5,7 @@ import Image from 'next/image';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
 
-const projects = [
-  {
-    id: 1,
-    name: 'Residential Solar Installation',
-    description: 'Complete solar power solution for residential properties',
-    location: 'Manila, Philippines',
-    image: '/images/projects/1stprojcard.jpg',
-    category: 'residential'
-  },
-  {
-    id: 2,
-    name: 'Commercial Solar Array',
-    description: 'Large-scale solar installation for commercial building',
-    location: 'Cebu, Philippines',
-    image: '/images/projects/2ndprojcard.jpg',
-    category: 'commercial'
-  },
-  {
-    id: 3,
-    name: 'Industrial Solar Farm',
-    description: 'Megawatt-scale solar farm for industrial use',
-    location: 'Laguna, Philippines',
-    image: '/images/projects/3rdprojcard.jpg',
-    category: 'industrial'
-  },
-  {
-    id: 4,
-    name: 'Solar Carport Installation',
-    description: 'Dual-purpose solar carport with EV charging',
-    location: 'Taguig, Philippines',
-    image: '/images/projects/4thprojcard.jpg',
-    category: 'commercial'
-  },
-  {
-    id: 5,
-    name: 'Off-Grid Solar System',
-    description: 'Complete off-grid solution for remote location',
-    location: 'Palawan, Philippines',
-    image: '/images/projects/5thprojcard.jpg',
-    category: 'residential'
-  },
-  {
-    id: 6,
-    name: 'Solar Water Pumping',
-    description: 'Solar-powered water pumping system for agriculture',
-    location: 'Nueva Ecija, Philippines',
-    image: '/images/projects/6thprojcard.png',
-    category: 'agricultural'
-  }
-];
+import { projects } from '@/data/projects';
 
 export default function ProjectsPage() {
   const [activeCategory, setActiveCategory] = useState('all');
@@ -78,11 +29,11 @@ export default function ProjectsPage() {
         <div className="bg-white py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
-              <h2 className="text-3xl font-extrabold text-gray-900 sm:text-4xl">
-                Our Projects
+              <h2 className="text-3xl text-gray-900 sm:text-4xl">
+                Projects
               </h2>
               <p className="mt-4 text-xl text-gray-600 max-w-3xl mx-auto">
-                Showcasing our expertise in solar energy solutions
+                Real projects. Real energy savings.
               </p>
             </div>
             
@@ -93,7 +44,7 @@ export default function ProjectsPage() {
                   Our Work in Action
                 </h3>
                 <p className="text-2xl text-gray-600">
-                  See How We&apos;re Powering the Future
+                  Every Panel Tells a Story.
                 </p>
               </div>
               
@@ -142,7 +93,7 @@ export default function ProjectsPage() {
                   <div className="relative h-64 w-full">
                     <Image
                       src={project.image}
-                      alt={project.name}
+                      alt={project.title}
                       fill
                       className="object-cover"
                     />

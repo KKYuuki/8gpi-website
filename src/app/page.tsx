@@ -1,23 +1,16 @@
 'use client';
 
-import { useState, useEffect, useCallback } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
-import { FiArrowRight, FiChevronLeft, FiChevronRight, FiSun, FiZap, FiShield, FiTrendingUp } from 'react-icons/fi';
+import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
+import { projects } from '@/data/projects';
 
 export default function Home() {
-  const [activeSlide, setActiveSlide] = useState(0);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  // Auto-rotate slides
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setActiveSlide((prev) => (prev + 1) % 3);
-    }, 5000);
-    return () => clearInterval(interval);
-  }, []);
+  // Carousel state for products and projects
+  const [activeProduct, setActiveProduct] = useState(0);
+  const [activeProject, setActiveProject] = useState(0);
 
   // Background images for the hero section
   const heroBackgrounds = [
@@ -77,87 +70,26 @@ export default function Home() {
     }
   ];
 
-  // Projects data
-  const projects = [
-    {
-      id: 1,
-      title: 'Residential Solar Installation',
-      description: 'Complete solar solution for a family home in Cebu City',
-      image: '/images/projects/1stprojcard.jpg',
-      category: 'residential',
-      location: 'Cebu City, Cebu'
-    },
-    {
-      id: 2,
-      title: 'Commercial Rooftop Solar',
-      description: 'Large-scale solar installation for a shopping mall',
-      image: '/images/projects/2ndprojcard.jpg',
-      category: 'commercial',
-      location: 'Mandaue City, Cebu'
-    },
-    {
-      id: 3,
-      title: 'Industrial Solar Farm',
-      description: 'Megawatt-scale solar farm for industrial power needs',
-      image: '/images/projects/3rdprojcard.jpg',
-      category: 'industrial',
-      location: 'Lapu-Lapu City, Cebu'
-    },
-    {
-      id: 4,
-      title: 'Municipal Building Solar',
-      description: 'Government building solar panel installation',
-      image: '/images/projects/4thprojcard.jpg',
-      category: 'municipal',
-      location: 'Talisay City, Cebu'
-    }
-  ];
+  // Features data - moved to a separate component or can be removed if not used
 
-  // Features data
-  const features = [
-    {
-      icon: <FiSun className="w-8 h-8 text-green-600" />,
-      title: 'Clean Energy',
-      description: 'Harness renewable solar power to reduce your carbon footprint and energy bills.'
-    },
-    {
-      icon: <FiZap className="w-8 h-8 text-green-600" />,
-      title: 'High Efficiency',
-      description: 'Our advanced solar panels deliver maximum energy output even in low-light conditions.'
-    },
-    {
-      icon: <FiShield className="w-8 h-8 text-green-600" />,
-      title: '25-Year Warranty',
-      description: 'Industry-leading warranty for peace of mind on your investment.'
-    },
-    {
-      icon: <FiTrendingUp className="w-8 h-8 text-green-600" />,
-      title: 'Increased Property Value',
-      description: 'Solar installations can increase your property value by up to 4.1% on average.'
-    }
-  ];
-
-  // Carousel state for products and projects
-  const [activeProduct, setActiveProduct] = useState(0);
-  const [activeProject, setActiveProject] = useState(0);
 
   // Carousel navigation for products
-  const nextProduct = useCallback(() => {
+  const nextProduct = () => {
     setActiveProduct((prev) => (prev + 1) % Math.ceil(products.length / 3));
-  }, [products.length]);
+  };
 
-  const prevProduct = useCallback(() => {
+  const prevProduct = () => {
     setActiveProduct((prev) => (prev - 1 + Math.ceil(products.length / 3)) % Math.ceil(products.length / 3));
-  }, [products.length]);
+  };
 
   // Carousel navigation for projects
-  const nextProject = useCallback(() => {
+  const nextProject = () => {
     setActiveProject((prev) => (prev + 1) % Math.ceil(projects.length / 3));
-  }, [projects.length]);
+  };
 
-  const prevProject = useCallback(() => {
+  const prevProject = () => {
     setActiveProject((prev) => (prev - 1 + Math.ceil(projects.length / 3)) % Math.ceil(projects.length / 3));
-  }, [projects.length]);
+  };
 
   // Removed auto-rotation for manual control only
 
