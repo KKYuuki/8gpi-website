@@ -22,11 +22,55 @@ export default function Contact() {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [submitStatus, setSubmitStatus] = useState<{ type: 'success' | 'error' | null; message: string }>({ type: null, message: '' });
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    // Handle form submission
-    console.log('Form submitted:', formData);
-    // Add your form submission logic here
+    setIsSubmitting(true);
+    setSubmitStatus({ type: null, message: '' });
+
+    try {
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          ...formData,
+          inquiryType: selectedInquiry,
+        }),
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Something went wrong');
+      }
+
+      setSubmitStatus({
+        type: 'success',
+        message: 'Your message has been sent successfully! We\'ll get back to you soon.',
+      });
+      
+      // Reset form
+      setFormData({
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        address: '',
+        message: ''
+      });
+    } catch (error) {
+      console.error('Error submitting form:', error);
+      setSubmitStatus({
+        type: 'error',
+        message: error instanceof Error ? error.message : 'Failed to send message. Please try again.',
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const [selectedInquiry, setSelectedInquiry] = useState('residential');
@@ -169,14 +213,29 @@ export default function Contact() {
                   ></textarea>
                 </div>
                 
-                <div className="flex justify-center">
+                <div className="flex flex-col items-center space-y-4">
                   <button
                     type="submit"
-                    className="text-white py-2 px-8 rounded-md transition-colors duration-200 font-medium"
+                    className="text-white py-2 px-8 rounded-md transition-colors duration-200 font-medium disabled:opacity-70 flex items-center justify-center min-w-[120px]"
                     style={{ backgroundColor: '#0F7346' }}
+                    disabled={isSubmitting}
                   >
-                    Submit
+                    {isSubmitting ? (
+                      <>
+                        <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        Sending...
+                      </>
+                    ) : 'Submit'}
                   </button>
+                  
+                  {submitStatus.type && (
+                    <div className={`text-sm ${submitStatus.type === 'success' ? 'text-green-600' : 'text-red-600'}`}>
+                      {submitStatus.message}
+                    </div>
+                  )}
                 </div>
               </form>
             </div>
