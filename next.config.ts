@@ -13,21 +13,14 @@ const nextConfig: NextConfig = {
   basePath: '',
   
   // Configure images for static export
-  // Image optimization is handled by Cloudflare Pages
   images: {
     unoptimized: true,
     domains: [],
-    loader: 'custom',
-    loaderFile: './src/utils/image-loader.js',
   },
   
   // Environment variables
   env: {
-    // Public environment variables
     NEXT_PUBLIC_EMAIL_RECIPIENT: process.env.NEXT_PUBLIC_EMAIL_RECIPIENT || 'kennethcantillas@gmail.com',
-    
-    // Server-side environment variables (will be replaced at build time)
-    RESEND_API_KEY: process.env.RESEND_API_KEY || '',
   },
   
   // Enable React Strict Mode
@@ -62,7 +55,7 @@ const nextConfig: NextConfig = {
         http: false,
         https: false,
         stream: false,
-        crypto: false,
+        crypto: require.resolve('crypto-browserify'),
         path: false,
         os: false,
       };
@@ -71,7 +64,11 @@ const nextConfig: NextConfig = {
     // Add Cloudflare Pages compatibility
     if (!isServer && !dev) {
       config.output.webassemblyModuleFilename = 'static/wasm/[modulehash].wasm';
-      config.experiments = { asyncWebAssembly: true };
+      config.experiments = { 
+        ...config.experiments,
+        asyncWebAssembly: true,
+        layers: true
+      };
     }
 
     return config;
@@ -85,12 +82,7 @@ const nextConfig: NextConfig = {
   // Generate a static export
   generateBuildId: async () => {
     return 'build-' + Date.now();
-  },
-  
-  // Enable static HTML export
-  // This is required for Cloudflare Pages
-  outputFileTracing: true,
-  
+  }
 };
 
 export default nextConfig;
