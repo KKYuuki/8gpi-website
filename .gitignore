@@ -48,6 +48,9 @@ yarn-error.log*
 
 # Build cache
 .cache/
+
+# OpenNext build output
+.open-next/
 .temp/
 .tmp/
 .next/cache/

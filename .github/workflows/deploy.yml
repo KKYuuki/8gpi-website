@@ -45,3 +45,6 @@ jobs:
           directory: .open-next/static-files
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
           wranglerConfigPath: 'wrangler.toml'
+          environment: production
+          workingDirectory: .
+          wranglerVersion: 'latest'
