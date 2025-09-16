@@ -4,12 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
-    "preview": "npx serve .vercel/output/static",
+    "build": "next build && next export -o out",
+    "preview": "npx serve out",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "npm run build && npx open-next@latest build",
-    "cf-typegen": "wrangler types --env-interface CloudflareEnv env.d.ts"
+    "deploy": "vercel --prod",
+    "vercel-build": "next build && next export -o out"
   },
   "dependencies": {
     "@next/env": "^15.5.3",
