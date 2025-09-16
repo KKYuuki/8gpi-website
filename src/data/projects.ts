@@ -2,49 +2,57 @@ export const projects = [
   {
     id: 1,
     title: 'Residential Solar Installation',
-    description: 'Complete solar solution for a family home in Cebu City',
+    description: '150kVa Purely Grid Tie',
     image: '/images/projects/1stprojcard.jpg',
-    category: 'residential',
-    location: 'Cebu City, Cebu'
+    location: 'Bacolod, Negros Oriental '
   },
   {
     id: 2,
     title: 'Commercial Rooftop Solar',
-    description: 'Large-scale solar installation for a shopping mall',
+    description: '110kVa Purely Grid Tie',
     image: '/images/projects/2ndprojcard.jpg',
-    category: 'commercial',
-    location: 'Mandaue City, Cebu'
+    location: 'Bacolod, Negros Oriental'
   },
   {
     id: 3,
     title: 'Industrial Solar Farm',
-    description: 'Megawatt-scale solar farm for industrial use',
+    description: '50kVa',
     image: '/images/projects/3rdprojcard.jpg',
-    category: 'industrial',
-    location: 'Laguna, Philippines'
+    location: 'Bacolod, Negros Oriental'
   },
   {
     id: 4,
     title: 'Solar Carport Installation',
-    description: 'Dual-purpose solar carport with EV charging',
+    description: '207kVa Purely Grid Tie',
     image: '/images/projects/4thprojcard.jpg',
-    category: 'commercial',
-    location: 'Taguig, Philippines'
+    location: 'Bacolod, Negros Oriental'
   },
   {
     id: 5,
-    title: 'Off-Grid Solar System',
-    description: 'Complete off-grid solution for remote location',
+    title: 'Residential Solar Installation',
+    description: '10kVa Purely Grid Tie',
     image: '/images/projects/5thprojcard.jpg',
-    category: 'residential',
-    location: 'Palawan, Philippines'
+    location: 'Cebu City, Cebu'
   },
   {
     id: 6,
-    title: 'Solar Water Pumping',
-    description: 'Solar-powered water pumping system for agriculture',
+    title: 'Residential Solar Installation',
+    description: '60kVa Purely Grid Tie',
     image: '/images/projects/6thprojcard.png',
-    category: 'agricultural',
-    location: 'Nueva Ecija, Philippines'
+    location: 'Cebu City, Cebu'
+  },
+  {
+    id: 7,
+    title: 'Residential Solar Installation',
+    description: '12kVa Hybrid Solar PV System',
+    image: '/images/projects/Bago City.jpg',
+    location: 'Bago City, Negros Oriental'
+  },
+  {
+    id: 8,
+    title: 'Residential Solar Installation',
+    description: '16kVa Hybrid Solar PV System',
+    image: '/images/projects/Surigao Del Norte.jpg',
+    location: 'Surigao Del Norte, General Luna, Siargao Island'
   }
 ];

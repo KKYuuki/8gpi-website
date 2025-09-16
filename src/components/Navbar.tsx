@@ -15,9 +15,9 @@ export default function Navbar() {
           <Link href="/" className="block w-40 h-12 relative">
             <Image 
               src="/images/Logo.png" 
-              alt="8GPI Logo" 
+              alt="8GPI Logo - Solar Panel Installation Cebu | Cost of Solar Power Bacolod | Solar Maintenance Services Cebu City - facebook.com/8GenPower" 
               width={120}
-              height={48}
+              height={50}
               className="object-contain object-left"
               priority
             />
@@ -25,7 +25,7 @@ export default function Navbar() {
         </div>
         
         {/* Desktop Navigation */}
-        <div className="hidden md:flex space-x-10">
+        <div className="hidden md:flex space-x-15">
           <Link href="/products" className="text-black hover:text-green-600 py-2 font-medium">
             Products
           </Link>

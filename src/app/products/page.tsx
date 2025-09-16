@@ -80,25 +80,23 @@ export default function ProductsPage() {
 
         {/* Products Grid */}
         <div className="bg-white py-16">
-          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
             {products && products.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-12 max-w-5xl mx-auto">
                 {products.map((product) => (
-                  <div key={product.id} className="flex flex-col bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 h-full">
-                    <div className="relative h-64 w-full">
+                  <div key={product.id} className="group flex flex-col bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 h-full border border-gray-100 transform hover:-translate-y-1">
+                    <div className="relative aspect-[4/3] w-full">
                       <Image
                         src={product.image}
-                        alt={product.name}
+                        alt={`${product.name} - Solar Panel Installation Cebu | Cost of Solar Power Bacolod | Solar Maintenance Services Cebu City - facebook.com/8GenPower`}
                         fill
-                        className="object-cover"
+                        className="object-cover group-hover:scale-105 transition-transform duration-700"
+                        sizes="(max-width: 768px) 100vw, 50vw"
                       />
                     </div>
-                    <div className="p-5 flex flex-col flex-grow">
-                      <h3 className="text-lg font-semibold text-gray-900 mb-2">{product.name}</h3>
-                      <p className="text-gray-600 mb-4 text-sm flex-grow">{product.description}</p>
-                      <span className="inline-block bg-green-100 text-green-800 text-xs px-3 py-1.5 rounded-full self-start">
-                        {product.category.charAt(0).toUpperCase() + product.category.slice(1)}
-                      </span>
+                    <div className="p-8 flex flex-col flex-grow">
+                      <h3 className="text-xl font-semibold text-gray-900 mb-3">{product.name}</h3>
+                      <p className="text-gray-600 flex-grow">{product.description}</p>
                     </div>
                   </div>
                 ))}

@@ -4,13 +4,45 @@ import { useState, useEffect, useMemo } from 'react';
 import Image from 'next/image';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import Navbar from '@/components/Navbar';
-import Footer from '@/components/Footer';
 import { projects } from '@/data/projects';
+import { vector } from '@/data/vector';
+import Footer from '@/components/Footer';
+
+interface VectorItem {
+  id: number;
+  description: string;
+  image: string;
+}
 
 export default function Home() {
-  // Carousel state for products and projects
-  const [activeProduct, setActiveProduct] = useState(0);
+  // Carousel state for projects
   const [activeProject, setActiveProject] = useState(0);
+  const projectsPerPage = 3;
+  const totalProjects = projects.length;
+  const totalSlides = Math.ceil(totalProjects / projectsPerPage);
+  const visibleProjects = projects.slice(activeProject * projectsPerPage, (activeProject + 1) * projectsPerPage);
+
+  // Project carousel navigation with animation
+  const [isAnimating, setIsAnimating] = useState(false);
+  const [slideDirection, setSlideDirection] = useState<'left' | 'right'>('right');
+
+  const nextProject = () => {
+    if (activeProject < totalSlides - 1 && !isAnimating) {
+      setSlideDirection('right');
+      setActiveProject(prev => prev + 1);
+      setIsAnimating(true);
+      setTimeout(() => setIsAnimating(false), 500); // Match this with CSS transition duration
+    }
+  };
+
+  const prevProject = () => {
+    if (activeProject > 0 && !isAnimating) {
+      setSlideDirection('left');
+      setActiveProject(prev => prev - 1);
+      setIsAnimating(true);
+      setTimeout(() => setIsAnimating(false), 500); // Match this with CSS transition duration
+    }
+  };
 
   // Background images for the hero section
   const heroBackgrounds = useMemo(() => [
@@ -46,61 +78,6 @@ export default function Home() {
     return () => clearInterval(interval);
   }, [heroBackgrounds.length]);
 
-  // Products data
-  const products = [
-    {
-      id: 1,
-      name: 'Monocrystalline Solar Panel',
-      description: 'High-efficiency monocrystalline solar panels for maximum energy production',
-      category: 'residential',
-      image: '/images/product/1stcard.jpg'
-    },
-    {
-      id: 2,
-      name: 'Polycrystalline Solar Panel',
-      description: 'Cost-effective polycrystalline panels with great performance',
-      category: 'commercial',
-      image: '/images/product/2ndcard.jpg'
-    },
-    {
-      id: 3,
-      name: 'Solar Inverter',
-      description: 'Advanced solar inverters for optimal energy conversion',
-      category: 'industrial',
-      image: '/images/product/3rdcard.png'
-    },
-    {
-      id: 4,
-      name: 'Solar Battery',
-      description: 'High-capacity solar batteries for energy storage',
-      category: 'residential',
-      image: '/images/product/4thcard.jpg'
-    }
-  ];
-
-  // Features data - moved to a separate component or can be removed if not used
-
-
-  // Carousel navigation for products
-  const nextProduct = () => {
-    setActiveProduct((prev) => (prev + 1) % Math.ceil(products.length / 3));
-  };
-
-  const prevProduct = () => {
-    setActiveProduct((prev) => (prev - 1 + Math.ceil(products.length / 3)) % Math.ceil(products.length / 3));
-  };
-
-  // Carousel navigation for projects
-  const nextProject = () => {
-    setActiveProject((prev) => (prev + 1) % Math.ceil(projects.length / 3));
-  };
-
-  const prevProject = () => {
-    setActiveProject((prev) => (prev - 1 + Math.ceil(projects.length / 3)) % Math.ceil(projects.length / 3));
-  };
-
-  // Removed auto-rotation for manual control only
-
   return (
     <div className="min-h-screen flex flex-col bg-white">
       <Navbar />
@@ -118,7 +95,7 @@ export default function Home() {
             >
               <Image
                 src={bg}
-                alt={`Background ${index + 1}`}
+                alt={`8GPI Solar Solutions - Solar Panel Installation Cebu | Cost of Solar Power Bacolod | Solar Maintenance Services Cebu City - facebook.com/8GenPower Background ${index + 1}`}
                 fill
                 priority={index === 0}
                 className="object-cover"
@@ -132,16 +109,18 @@ export default function Home() {
         <div className="absolute inset-0 bg-black/30"></div>
         
         {/* Static Content - Centered */}
-        <div className="relative z-20 flex flex-col items-center justify-center h-full text-center px-6 pt-24 lg:pt-0">
-          <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">{heroContent.title}</h1>
-          <p className="text-2xl md:text-3xl text-gray-100 mb-8 max-w-3xl">{heroContent.description}</p>
-          <a 
-            href={heroContent.buttonLink}
-            className="text-white font-medium py-4 px-10 rounded-lg transition-all duration-300 inline-block text-center text-lg hover:bg-green-700"
-            style={{ backgroundColor: '#0F7346' }}
-          >
-            {heroContent.buttonText}
-          </a>
+        <div className="relative z-20 w-full max-w-7xl mx-auto flex flex-col items-center justify-center h-full text-center px-4 sm:px-6 lg:px-8 pt-24 lg:pt-0">
+          <div className="w-full px-4 sm:px-6 lg:px-8">
+            <h1 className="text-5xl md:text-7xl font-bold text-black mb-6">{heroContent.title}</h1>
+            <p className="text-2xl md:text-3xl text-black mb-8 max-w-3xl mx-auto">{heroContent.description}</p>
+            <a 
+              href={heroContent.buttonLink}
+              className="text-white font-medium py-4 px-10 rounded-lg transition-all duration-300 inline-block text-center text-lg hover:bg-green-700"
+              style={{ backgroundColor: '#0F7346' }}
+            >
+              {heroContent.buttonText}
+            </a>
+          </div>
         </div>
       </div>
 
@@ -160,7 +139,7 @@ export default function Home() {
             <div className="relative h-96 w-full rounded-xl overflow-hidden shadow-xl order-1 lg:order-2">
               <Image
                 src="/images/WriteUp.jpg"
-                alt="Solar Panel Installation"
+                alt="Professional Solar Panel Installation Cebu - Cost of Solar Power Bacolod | Solar Maintenance Services Cebu City - facebook.com/8GenPower"
                 fill
                 className="object-cover"
               />
@@ -171,73 +150,51 @@ export default function Home() {
 
       
 
-      {/* Products Section */}
+      {/* Features Section */}
       <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h3 className="text-3xl md:text-3xl text-gray-900 mb-4">
+            <h3 className="text-2xl md:text-3xl text-gray-600">
               Explore Our Solar Solutions
             </h3>
-            <p className='text-lg text-gray-600'>
+            <p className="text-lg md:text-2xl text-gray-600">
               Tailored systems for homes, businesses, and industries
             </p>
           </div>
 
-          <div className="relative">
-            {/* Navigation Arrows */}
-            <button 
-              onClick={prevProduct}
-              className="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-12 z-10 bg-white w-12 h-12 rounded-full shadow-md flex items-center justify-center hover:bg-gray-100 transition-colors"
-              aria-label="Previous products"
-            >
-              <FiChevronLeft className="w-6 h-6 text-gray-700" />
-            </button>
-            
-            <div className="relative overflow-hidden">
-              <div 
-                className="flex transition-transform duration-500 ease-in-out"
-                style={{ transform: `translateX(-${activeProduct * 100}%)` }}
-              >
-                {products.map((product) => (
-                  <div key={product.id} className="w-1/4 flex-shrink-0 px-3">
-                    <div className="bg-gray-50 rounded-xl overflow-hidden shadow-md hover:shadow-lg transition-shadow h-full">
-                      <div className="relative h-48 w-full">
-                        <Image
-                          src={product.image}
-                          alt={product.name}
-                          fill
-                          className="object-cover"
-                        />
-                      </div>
-                      <div className="p-6">
-                        <h3 className="text-xl font-semibold text-gray-900 mb-2">{product.name}</h3>
-                        <p className="text-gray-600 mb-4">{product.description}</p>
-                      </div>
-                    </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {vector && vector.length > 0 ? (
+              vector.map((item: VectorItem) => (
+                <div key={item.id} className="group flex flex-col items-center text-center p-6 bg-white rounded-xl shadow-md hover:shadow-xl transition-all duration-300 border border-gray-100">
+                  <div className="relative h-32 w-32 mb-4">
+                    <Image 
+                      src={item.image} 
+                      alt={`${item.description} - Solar Panel Installation Cebu | Cost of Solar Power Bacolod | Solar Maintenance Services Cebu City - facebook.com/8GenPower`}
+                      fill
+                      className="object-contain"
+                    />
                   </div>
-                ))}
+                  <h4 className="text-xl font-semibold text-gray-900">{item.description}</h4>
+                </div>
+              ))
+            ) : (
+              <div className="col-span-full text-center py-8">
+                <p className="text-gray-600">No features available at the moment.</p>
               </div>
-            </div>
-
-            <button 
-              onClick={nextProduct}
-              className="absolute right-0 top-1/2 -translate-y-1/2 translate-x-12 z-10 bg-white w-12 h-12 rounded-full shadow-md flex items-center justify-center hover:bg-gray-100 transition-colors"
-              aria-label="Next products"
-            >
-              <FiChevronRight className="w-6 h-6 text-gray-700" />
-            </button>
+            )}
           </div>
         </div>
       </section>
+                    
 
       {/* Projects Section */}
       <section className="py-20">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-12">
-            <h2 className="text-3xl md:text-3xl text-gray-900 mb-4">
+            <h2 className="text-2xl md:text-3xl text-gray-600">
               See Our Work in Action
             </h2>
-            <p className='text-lg text-gray-600'>
+            <p className='text-lg md:text-2xl text-gray-600'>
               Designed. Installed. Delivered with impact
             </p>
           </div>
@@ -254,27 +211,26 @@ export default function Home() {
             
             <div className="relative overflow-hidden">
               <div 
-                className="flex transition-transform duration-500 ease-in-out"
-                style={{ transform: `translateX(-${activeProject * 100}%)` }}
+                className={`flex transition-transform duration-500 ease-in-out ${
+                  isAnimating ? (slideDirection === 'right' ? 'translate-x-[-100%]' : 'translate-x-[100%]') : ''
+                }`}
               >
-                {projects.map((project) => (
-                  <div key={project.id} className="w-1/3 flex-shrink-0 px-3">
+                {visibleProjects.map((project) => (
+                  <div key={project.id} className="w-full md:w-1/3 flex-shrink-0 px-3">
                     <div className="flex flex-col bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 h-full">
                       <div className="relative h-64 w-full">
                         <Image
                           src={project.image}
-                          alt={project.title}
+                          alt={`${project.title} - Solar Panel Installation Cebu | Cost of Solar Power Bacolod | Solar Maintenance Services Cebu City - facebook.com/8GenPower`}
                           fill
                           className="object-cover"
                         />
                       </div>
                       <div className="p-5 flex flex-col flex-grow">
+                        <h4 className="text-lg font-semibold text-gray-900 mb-2">{project.title}</h4>
                         <p className="text-gray-600 text-sm flex-grow mb-4">{project.description}</p>
-                        <div className="flex justify-between items-center mt-auto">
+                        <div className="mt-auto">
                           <span className="text-sm text-gray-500">{project.location}</span>
-                          <span className="inline-block bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full">
-                            {project.category.charAt(0).toUpperCase() + project.category.slice(1)}
-                          </span>
                         </div>
                       </div>
                     </div>
@@ -294,34 +250,37 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Investment Return Section */}
-      <section className="py-20 bg-white">
+      {/* Video Section */}
+      <section className="py-20 bg-gray-50">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            <div className="relative h-96 w-full rounded-xl overflow-hidden shadow-xl order-1">
-              <video 
-                className="w-full h-full object-cover" 
-                autoPlay 
-                loop 
-                muted
-                playsInline
-              >
-                <source src="/images/WriteUp(Video).mp4" type="video/mp4" />
-                Your browser does not support the video tag.
-              </video>
-            </div>
-            <div className="space-y-6 order-2">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+          <div className="flex flex-col lg:flex-row-reverse items-center gap-12">
+            <div className="lg:w-1/2">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
                 Earn Back Your Investment in Just 2 Years
               </h2>
-              <p className="text-lg text-gray-600">
+              <p className="text-lg text-gray-600 mb-8">
                 With 8GPI&apos;s efficient solar PV systems, customers typically recover their investment within 2 years — thanks to drastically reduced electricity bills and long-term energy savings.
               </p>
+            </div>
+            <div className="lg:w-1/2 w-full">
+              <div className="relative aspect-video rounded-xl overflow-hidden shadow-xl">
+                <video 
+                  autoPlay 
+                  muted 
+                  loop 
+                  playsInline
+                  className="w-full h-full object-cover"
+                  poster="/images/video-placeholder.jpg"
+                >
+                  <source src="/videos/rooftop-solar.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
             </div>
           </div>
         </div>
       </section>
-
+      
       <Footer />
     </div>
   );

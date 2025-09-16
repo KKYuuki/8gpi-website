@@ -21,8 +21,8 @@ export default function AboutPage() {
       >
         <div className="absolute inset-0 bg-black/60 z-0"></div>
         <div className="relative z-10 text-center px-4">
-          <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">About 8Gen Power Inc.</h1>
-          <h2 className="text-2xl md:text-3xl font-semibold text-green-300 mb-6">Solar PV Solutions</h2>
+          <h1 className="text-4xl md:text-6xl font-bold text-black mb-4">About 8Gen Power Inc.</h1>
+          <h2 className="text-2xl md:text-3xl font-bold text-black mb-6">Solar PV Solutions</h2>
         </div>
       </section>
 
@@ -35,7 +35,7 @@ export default function AboutPage() {
               <div className="relative h-96 w-full rounded-lg overflow-hidden shadow-lg">
                 <Image
                   src="/images/aboutuspage/WriteUpAboutUs.jpg"
-                  alt="8Gen Power Team"
+                  alt="8Gen Power Team - Expert Solar Panel Installation Cebu | Affordable Cost of Solar Power Bacolod | Professional Solar Maintenance Services Cebu City - facebook.com/8GenPower"
                   fill
                   className="object-cover"
                 />
@@ -94,7 +94,7 @@ export default function AboutPage() {
             <div className="w-40 h-40 relative">
               <Image
                 src="/images/aboutuspage/CEAAPILogo.png"
-                alt="CEAAPI Logo"
+                alt="CEAAPI Certified - Trusted Solar Panel Installation Cebu | Best Cost of Solar Power Bacolod | Reliable Solar Maintenance Services Cebu City - facebook.com/8GenPower"
                 fill
                 className="object-contain"
               />
@@ -118,7 +118,7 @@ export default function AboutPage() {
                   <div className="w-16 h-16 relative">
                     <Image
                       src="/images/aboutuspage/handshake.png"
-                      alt="Client Focused Approach"
+                      alt="Client Focused Solar Solutions - Expert Solar Panel Installation Cebu | Affordable Cost of Solar Power Bacolod | Professional Solar Maintenance Services Cebu City - facebook.com/8GenPower"
                       fill
                       className="object-contain"
                     />
@@ -135,7 +135,7 @@ export default function AboutPage() {
                   <div className="w-16 h-16 relative">
                     <Image
                       src="/images/aboutuspage/energy_savings_leaf.png"
-                      alt="Sustainable Energy Solutions"
+                      alt="Sustainable Energy Solutions - Eco-friendly Solar Panel Installation Cebu | Cost-effective Solar Power Bacolod | Green Solar Maintenance Services Cebu City - facebook.com/8GenPower"
                       fill
                       className="object-contain"
                     />
@@ -152,7 +152,7 @@ export default function AboutPage() {
                   <div className="w-16 h-16 relative">
                     <Image
                       src="/images/aboutuspage/handyman.png"
-                      alt="Professional Installation & Support"
+                      alt="Professional Solar Panel Installation & Support Cebu | Reliable Cost of Solar Power Bacolod | Expert Solar Maintenance Services Cebu City - facebook.com/8GenPower"
                       fill
                       className="object-contain"
                     />

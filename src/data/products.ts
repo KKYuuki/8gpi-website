@@ -1,44 +1,26 @@
 export const products = [
   {
     id: 1,
-    name: 'Monocrystalline Solar Panel',
-    description: 'High-efficiency monocrystalline solar panels for maximum energy production',
-    category: 'residential',
-    image: '/images/product/1stcard.jpg'
+    name: 'Hybrid Solar Pv System',
+    description: 'A Hybrid Solar PV System combines solar panels with battery storage and a grid connection. It allows homeowners or businesses to use solar power during the day, store excess energy in batteries, and draw from the grid when needed—ensuring continuous power supply even during blackouts.',
+    image: '/images/product/Hybrid Solar Pv System.png'
   },
   {
     id: 2,
-    name: 'Polycrystalline Solar Panel',
-    description: 'Cost-effective polycrystalline panels with great performance',
-    category: 'commercial',
-    image: '/images/product/2ndcard.jpg'
+    name: 'Net Metering Assitance',
+    description: 'Net Metering Assistance is the support service provided to help clients apply for and process their net metering applications with the utility company. This allows them to export excess solar energy to the grid and receive credits on their electricity bill, maximizing savings from their solar investment.',
+    image: '/images/product/Net Metering Assitance.png'
   },
   {
     id: 3,
-    name: 'Thin-Film Solar Panel',
-    description: 'Lightweight and flexible solar solution for various applications',
-    category: 'industrial',
-    image: '/images/product/3rdcard.png'
+    name: 'Off-Grid Solar PV System',
+    description: 'An Off-Grid Solar PV System operates independently from the utility grid. It is equipped with batteries to store solar energy for nighttime or cloudy days, making it ideal for remote locations or areas without stable grid access.',
+    image: '/images/product/Off-Grid Solar PV System.png'
   },
   {
     id: 4,
-    name: 'Solar Inverter',
-    description: 'High-performance inverter for converting DC to AC power',
-    category: 'utility',
-    image: '/images/product/4thcard.jpg'
-  },
-  {
-    id: 5,
-    name: 'Solar Battery Storage',
-    description: 'Efficient energy storage solutions for solar systems',
-    category: 'residential',
-    image: '/images/product/5thcard.png'
-  },
-  {
-    id: 6,
-    name: 'Solar Mounting System',
-    description: 'Durable mounting solutions for all types of solar panels',
-    category: 'commercial',
-    image: '/images/product/6thcard.jpg'
+    name: 'On-Grid Solar PV System',
+    description: 'An On-Grid Solar PV System is directly connected to the utility grid without battery storage. It uses solar power during the day and automatically sources electricity from the grid at night or during low sunlight.',
+    image: '/images/product/On-Grid Solar PV System.png'
   }
 ];

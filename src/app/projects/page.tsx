@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import Image from 'next/image';
 import Navbar from '../../components/Navbar';
 import Footer from '../../components/Footer';
@@ -8,18 +7,7 @@ import Footer from '../../components/Footer';
 import { projects } from '@/data/projects';
 
 export default function ProjectsPage() {
-  const [activeCategory, setActiveCategory] = useState('all');
-  
-  const categories = [
-    { id: 'all', name: 'All Projects' },
-    { id: 'residential', name: 'Residential' },
-    { id: 'commercial', name: 'Commercial' },
-    { id: 'industrial', name: 'Industrial' }
-  ];
-  
-  const filteredProjects = activeCategory === 'all' 
-    ? projects 
-    : projects.filter(project => project.category === activeCategory);
+  const filteredProjects = projects;
 
   return (
     <div className="min-h-screen flex flex-col bg-white">
@@ -78,41 +66,31 @@ export default function ProjectsPage() {
         {/* Projects Grid */}
         <div className="bg-white py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            {/* Category Filter Buttons */}
-            <div className="flex flex-wrap justify-center gap-3 mb-12">
-              {categories.map((category) => (
-                <button
-                  key={category.id}
-                  onClick={() => setActiveCategory(category.id)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                    activeCategory === category.id
-                      ? 'bg-green-600 text-white'
-                      : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
-                  }`}
-                >
-                  {category.name}
-                </button>
-              ))}
+            {/* Project Grid Header */}
+            <div className="text-center mb-12">
+              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">Our Projects</h2>
+              <p className="text-lg text-gray-600">Explore our recent solar installations across the region</p>
             </div>
             
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {filteredProjects.map((project) => (
-                <div key={project.id} className="flex flex-col bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-shadow duration-300 h-full">
-                  <div className="relative h-64 w-full">
+                <div key={project.id} className="group flex flex-col bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 h-full border border-gray-100">
+                  <div className="relative h-64 w-full overflow-hidden">
                     <Image
                       src={project.image}
-                      alt={project.title}
+                      alt={`${project.title} - Solar Panel Installation Cebu | Cost of Solar Power Bacolod | Solar Maintenance Services Cebu City - facebook.com/8GenPower`}
                       fill
-                      className="object-cover"
+                      className="object-cover group-hover:scale-105 transition-transform duration-500"
                     />
                   </div>
-                  <div className="p-5 flex flex-col flex-grow">
-                    <p className="text-gray-600 text-sm flex-grow">{project.description}</p>
-                    <div className="flex justify-between items-center mt-4">
-                      <span className="text-sm text-gray-500">{project.location}</span>
-                      <span className="inline-block bg-green-100 text-green-800 text-xs px-3 py-1 rounded-full">
-                        {project.category.charAt(0).toUpperCase() + project.category.slice(1)}
-                      </span>
+                  <div className="p-6 flex flex-col flex-grow">
+                    <div className="flex justify-between items-start mb-3">
+                      <div className="flex items-center text-sm text-gray-500 rounded">
+                        <p> 📍{project.location}</p>
+                      </div>
+                    </div>
+                    <div className="mb-4">
+                      <p className="text-gray-600">{project.description}</p>
                     </div>
                   </div>
                 </div>

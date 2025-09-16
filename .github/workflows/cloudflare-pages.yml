@@ -11,7 +11,8 @@ jobs:
     runs-on: ubuntu-latest
     name: Deploy
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@v4
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -22,30 +23,38 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build and Export
+      - name: Build
         run: |
           # Create .env.local file for build
           echo "RESEND_API_KEY=$RESEND_API_KEY" > .env.local
           echo "NEXT_PUBLIC_EMAIL_RECIPIENT=$NEXT_PUBLIC_EMAIL_RECIPIENT" >> .env.local
           
-          # Install serve for local testing
-          npm install -g serve
-          
-          # Build and export the application
+          # Build the application
           npm run build
+          
+          # Create static export
           npm run export
+          
+          # Create required directories
+          mkdir -p .vercel/output/static
           
           # Create a _routes.json file for Cloudflare Pages
           echo '{"version":1,"include":["/*"],"exclude":["/_next/static/*"]}' > .vercel/output/static/_routes.json
+          
+          # Create a _headers file for Cloudflare Pages
+          echo '/*' > .vercel/output/static/_headers
+          echo '  X-Frame-Options: DENY' >> .vercel/output/static/_headers
+          echo '  X-Content-Type-Options: nosniff' >> .vercel/output/static/_headers
+          echo '  X-XSS-Protection: 1; mode=block' >> .vercel/output/static/_headers
+          echo '  Referrer-Policy: strict-origin-when-cross-origin' >> .vercel/output/static/_headers
+          echo '  Permissions-Policy: camera=(), microphone=(), geolocation=()' >> .vercel/output/static/_headers
         env:
           RESEND_API_KEY: ${{ secrets.RESEND_API_KEY || 'dummy-key' }}
           NEXT_PUBLIC_EMAIL_RECIPIENT: ${{ secrets.NEXT_PUBLIC_EMAIL_RECIPIENT || 'kennethcantillas@gmail.com' }}
 
-      - name: Publish to Cloudflare Pages
-        uses: cloudflare/pages-action@v1
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/wrangler-action@3.0.0
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          projectName: 8gpi-website
-          directory: .vercel/output/static
-          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          command: pages deploy .vercel/output/static --project-name=8gpi-website --branch=main
+          workingDirectory: .
