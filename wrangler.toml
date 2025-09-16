@@ -1,17 +1,16 @@
 name = "8gpi-website"
-main = ".vercel/output/static/_worker.js/index.js"
+main = ".open-next/server-function.cjs"
 compatibility_date = "2025-09-16"
 
 [build]
-  command = "npm run build && npx @cloudflare/next-on-pages"
-  publish = ".vercel/output/static"
+  command = "npm run build && npx open-next@latest build"
+  cwd = "."
+
+[compatibility_flags]
+  nodejs_compat = true
 
 [site]
-  bucket = ".vercel/output/static"
-
-[build.upload]
-  format = "service-worker"
-  main = ".vercel/output/static/_worker.js/index.js"
+  bucket = ".open-next/static-files"
 
 [env.production]
   name = "8gpi-website-prod"
@@ -21,3 +20,7 @@ compatibility_date = "2025-09-16"
 # [vars]
 # RESEND_API_KEY = ""
 # NEXT_PUBLIC_EMAIL_RECIPIENT = ""
+
+# Disable observability logs
+[observability.logs]
+enabled = false

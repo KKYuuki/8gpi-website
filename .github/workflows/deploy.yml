@@ -26,7 +26,7 @@ jobs:
       - name: Build
         run: |
           npm run build
-          npx @cloudflare/next-on-pages --compatibility-flags=nodejs_compat
+          npx open-next@latest build
         env:
           NODE_ENV: production
           # Add your environment variables here
@@ -39,6 +39,6 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           projectName: 8gpi-website
-          directory: .vercel/output/static
+          directory: .open-next/static-files
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
           wranglerConfigPath: 'wrangler.toml'
