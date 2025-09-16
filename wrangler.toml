@@ -1,9 +1,7 @@
 name = "8gpi-website"
 compatibility_date = "2023-10-02"
 
-[build]
-command = "npm run build"
-publish = "out"
-
-[build.upload]
-format = "directory"
+# For static site deployment
+[site]
+bucket = "./out"
+entry-point = "workers-site"
