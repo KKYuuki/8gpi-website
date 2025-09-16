@@ -1,41 +1,50 @@
 import type { NextConfig } from "next";
 
+const basePath = ''; // Set this if you need a base path (e.g., '/my-app')
+
 const nextConfig: NextConfig = {
-  // Enable static export for Vercel
   output: 'export',
+  basePath,
+  assetPrefix: basePath,
   
-  // Base path for deployment (empty for root domain)
-  basePath: process.env.NEXT_PUBLIC_BASE_PATH || '',
-  
-  // Configure images for static export
   images: {
     unoptimized: true,
+    domains: [],
   },
   
-  // Enable trailing slashes for static export
   trailingSlash: true,
   
-  // Environment variables
   env: {
     NEXT_PUBLIC_EMAIL_RECIPIENT: process.env.NEXT_PUBLIC_EMAIL_RECIPIENT || 'kennethcantillas@gmail.com',
-    NEXT_PUBLIC_VERCEL_URL: process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : '',
+    NEXT_PUBLIC_BASE_URL: process.env.VERCEL_URL 
+      ? `https://${process.env.VERCEL_URL}`
+      : 'http://localhost:3000',
   },
   
-  // Enable React Strict Mode
   reactStrictMode: true,
   
-  // TypeScript configuration
   typescript: {
     ignoreBuildErrors: true,
   },
   
-  // ESLint configuration
   eslint: {
     ignoreDuringBuilds: true,
   },
   
-  // Asset prefix for static exports
-  assetPrefix: process.env.NEXT_PUBLIC_BASE_PATH || '',
+  // Disable server-side rendering for static export
+  distDir: '.next',
+  
+  // Ensure static export works with dynamic routes
+  exportPathMap: async function() {
+    return {
+      '/': { page: '/' },
+      '/about': { page: '/about' },
+      '/contact': { page: '/contact' },
+      '/products': { page: '/products' },
+      '/projects': { page: '/projects' },
+      // Add any other dynamic routes here
+    };
+  },
 };
 
 export default nextConfig;
