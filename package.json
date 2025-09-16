@@ -4,12 +4,12 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build && next export",
-    "preview": "npx serve out",
+    "build": "next build",
+    "preview": "npx serve .next/static",
     "start": "next start",
     "lint": "next lint",
     "deploy": "vercel --prod",
-    "vercel-build": "next build && next export"
+    "vercel-build": "next build"
   },
   "dependencies": {
     "@next/env": "^15.5.3",
