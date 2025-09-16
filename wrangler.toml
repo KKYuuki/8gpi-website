@@ -1,14 +1,34 @@
 name = "8gpi-website"
-compatibility_date = "2023-10-02"
-main = "_worker.js"
-compatibility_flags = [ "nodejs_compat" ]
+type = "webpack"
+account_id = ""
+workers_dev = true
+route = ""
+zone_id = ""
 
 [build]
-command = "npm run build && npx @cloudflare/next-on-pages"
-publish = ".vercel/output/static"
+  command = "npm run build && npx @cloudflare/next-on-pages"
+  publish = ".vercel/output/static"
+  upload.format = "service-worker"
 
 [site]
-bucket = ".vercel/output/static"
+  bucket = ".vercel/output/static"
+  exclude = [
+    "cache/**/*",
+    "node_modules/**/*",
+    "**/.*",
+    "**/package-lock.json",
+    "**/yarn.lock"
+  ]
+
+[build.upload]
+  format = "service-worker"
+  dir = ".vercel/output/static"
+  main = "_worker.js"
+
+[env.production]
+  name = "8gpi-website-prod"
+  route = ""
+  zone_id = ""
 
 # Environment variables
 # These should be set in your Cloudflare Pages dashboard

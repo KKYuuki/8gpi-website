@@ -61,13 +61,33 @@ const nextConfig: NextConfig = {
       };
     }
 
+    // Disable source maps in production
+    if (!dev) {
+      config.devtool = false;
+    }
+
     // Add Cloudflare Pages compatibility
     if (!isServer && !dev) {
+      // Disable file system cache to prevent large cache files
+      config.cache = false;
+      
+      // Configure output
       config.output.webassemblyModuleFilename = 'static/wasm/[modulehash].wasm';
+      
+      // Configure experiments
       config.experiments = { 
         ...config.experiments,
         asyncWebAssembly: true,
-        layers: true
+        layers: true,
+        // Disable webpack cache
+        cacheUnaffected: false
+      };
+      
+      // Disable performance hints
+      config.performance = {
+        hints: false,
+        maxEntrypointSize: 512000,
+        maxAssetSize: 512000
       };
     }
 

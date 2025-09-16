@@ -51,6 +51,18 @@ yarn-error.log*
 .temp/
 .tmp/
 .next/cache/
+.cache/**/*
+.next/cache/**/*
+.vercel/cache/
+.vercel/cache/**/*
+node_modules/.cache/
+node_modules/.cache/**/*
+.cache-loader/
+.cache-loader/**/*
+.webpack/cache/
+.webpack/cache/**/*
+.cache
+.cache/**/*
 
 # Misc
 *.pem
