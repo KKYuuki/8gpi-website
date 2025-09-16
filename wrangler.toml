@@ -8,10 +8,11 @@ zone_id = ""
 [build]
   command = "npm run build && npx @cloudflare/next-on-pages"
   publish = ".vercel/output/static"
-  upload.format = "service-worker"
+  format = "service-worker"
 
 [site]
   bucket = ".vercel/output/static"
+  entry-point = ".vercel/output/static"
   exclude = [
     "cache/**/*",
     "node_modules/**/*",
@@ -19,11 +20,6 @@ zone_id = ""
     "**/package-lock.json",
     "**/yarn.lock"
   ]
-
-[build.upload]
-  format = "service-worker"
-  dir = ".vercel/output/static"
-  main = "_worker.js"
 
 [env.production]
   name = "8gpi-website-prod"
