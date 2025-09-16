@@ -1,16 +1,9 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-// Get environment variables
-const resendApiKey = process.env.RESEND_API_KEY;
+// Initialize Resend with environment variable
+const resend = process.env.RESEND_API_KEY ? new Resend(process.env.RESEND_API_KEY) : null;
 const recipientEmail = process.env.NEXT_PUBLIC_EMAIL_RECIPIENT || 'kennethcantillas@gmail.com';
-
-if (!resendApiKey) {
-  console.error('RESEND_API_KEY environment variable is not set');
-  throw new Error('Email service is not properly configured');
-}
-
-const resend = new Resend(resendApiKey);
 
 export async function POST(request: Request) {
   try {

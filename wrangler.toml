@@ -1,0 +1,21 @@
+name = "8gpi-website"
+compatibility_date = "2023-10-02"
+
+[build]
+command = "npm run build && npm run build:cf"
+publish = ".vercel/output/static"
+
+[build.upload]
+format = "directory"
+
+[env.production]
+name = "8gpi-website-production"
+
+[env.preview]
+name = "8gpi-website-preview"
+
+# Environment variables
+# These should be set in your Cloudflare Pages dashboard
+# [vars]
+# RESEND_API_KEY = ""
+# NEXT_PUBLIC_EMAIL_RECIPIENT = ""
