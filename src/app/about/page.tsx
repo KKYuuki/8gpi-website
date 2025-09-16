@@ -6,17 +6,17 @@ import Footer from '../../components/Footer';
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="flex flex-col bg-white">
       <Navbar />
       {/* Section 1: Hero with Background Image */}
       <section 
-        className="relative h-screen flex items-center justify-center overflow-hidden"
+        className="relative h-screen flex items-center justify-center overflow-hidden pt-24 lg:pt-0"
         style={{
           backgroundImage: 'url(/images/aboutuspage/AboutUsBG.jpg)',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
-          position: 'relative'
+          position: 'relative',
         }}
       >
         <div className="absolute inset-0 bg-black/60 z-0"></div>

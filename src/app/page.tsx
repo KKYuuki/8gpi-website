@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import Image from 'next/image';
 import { FiChevronLeft, FiChevronRight } from 'react-icons/fi';
 import Navbar from '@/components/Navbar';
@@ -13,11 +13,19 @@ export default function Home() {
   const [activeProject, setActiveProject] = useState(0);
 
   // Background images for the hero section
-  const heroBackgrounds = [
+  const heroBackgrounds = useMemo(() => [
     '/images/carousel(Background)/1stBG.png',
     '/images/carousel(Background)/2ndBG.png',
     '/images/carousel(Background)/3rdBG.png'
-  ];
+  ], []);
+  
+  // Preload images
+  useEffect(() => {
+    heroBackgrounds.forEach((src: string) => {
+      const img = new window.Image();
+      img.src = src;
+    });
+  }, [heroBackgrounds]);
   
   // Hero static content
   const heroContent = {
@@ -94,43 +102,48 @@ export default function Home() {
   // Removed auto-rotation for manual control only
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen flex flex-col bg-white">
       <Navbar />
       
-      {/* Hero Section with Cycling Background */}
-      <section className="relative h-screen">
+      {/* Hero Section with Background Carousel */}
+      <div className="relative w-full h-screen">
         {/* Background Images */}
-        <div className="absolute inset-0">
-          {heroBackgrounds.map((bg, index) => (
+        <div className="absolute inset-0 w-full h-full">
+          {heroBackgrounds.map((bg: string, index: number) => (
             <div 
               key={index}
-              className={`absolute inset-0 transition-opacity duration-1000 ${index === currentBg ? 'opacity-100' : 'opacity-0'}`}
+              className={`absolute inset-0 w-full h-full transition-opacity duration-1000 ${
+                index === currentBg ? 'opacity-100' : 'opacity-0'
+              }`}
             >
-              <div className="absolute inset-0 bg-black/50 z-10"></div>
               <Image
                 src={bg}
-                alt=""
+                alt={`Background ${index + 1}`}
                 fill
+                priority={index === 0}
                 className="object-cover"
-                priority
+                quality={100}
               />
             </div>
           ))}
         </div>
         
+        {/* Overlay */}
+        <div className="absolute inset-0 bg-black/30"></div>
+        
         {/* Static Content - Centered */}
-        <div className="relative z-20 flex flex-col items-center justify-center h-full text-center px-6">
+        <div className="relative z-20 flex flex-col items-center justify-center h-full text-center px-6 pt-24 lg:pt-0">
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-6">{heroContent.title}</h1>
           <p className="text-2xl md:text-3xl text-gray-100 mb-8 max-w-3xl">{heroContent.description}</p>
           <a 
             href={heroContent.buttonLink}
-            className="text-white font-medium py-4 px-10 rounded-lg transition-colors inline-block text-center text-lg"
+            className="text-white font-medium py-4 px-10 rounded-lg transition-all duration-300 inline-block text-center text-lg hover:bg-green-700"
             style={{ backgroundColor: '#0F7346' }}
           >
             {heroContent.buttonText}
           </a>
         </div>
-      </section>
+      </div>
 
       {/* Write-up Section */}
       <section className="py-20">

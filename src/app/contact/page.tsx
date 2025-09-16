@@ -24,6 +24,7 @@ export default function Contact() {
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<{ type: 'success' | 'error' | null; message: string }>({ type: null, message: '' });
+  const [selectedInquiry, setSelectedInquiry] = useState('residential');
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -73,72 +74,102 @@ export default function Contact() {
     }
   };
 
-  const [selectedInquiry, setSelectedInquiry] = useState('residential');
-
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-white">
       <Navbar />
-      <div className="w-1/2 h-px bg-black mt-32 mx-auto"></div>
-      <div className="flex-grow container mx-auto px-4 pt-12">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-12">
-            {/* Left Column - Google Maps and Contact Info */}
-            <div className="space-y-8">
-              <h1 className="text-3xl font-bold">Inquiry Form</h1>
-              
-              {/* Google Maps Embed */}
-              <div className="h-[400px] w-full rounded-lg overflow-hidden">
-                <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2486.4874936728197!2d123.90931022846817!3d10.323799061316175!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33a999d870a37435%3A0x5a68a7f60d546f3!2sMeridian%20by%20AVENIR!5e1!3m2!1sen!2sph!4v1757426673647!5m2!1sen!2sph"
-                  width="100%"
-                  height="100%"
-                  style={{ border: 0 }}
-                  allowFullScreen
-                  loading="lazy"
-                  referrerPolicy="no-referrer-when-downgrade"
-                  title="Location Map"
-                ></iframe>
-              </div>
-              {/* Contact Info - Minimal */}
-              <div className="text-sm text-gray-600 space-y-3">
-                <p>📍 Unit 1601, Meridian, Golam Drive, Kasambagan 6000 Cebu City, Philippines</p>
-                <p>☎ 0917 717 7103</p>
-                <p>📧 hvidal@1028business.ph</p>
-                <p>[Tel. Number]</p>
-              </div>
+      {/* Divider */}
+      <div 
+        className="w-full max-w-[1097px] h-px bg-black opacity-20 mx-auto"
+        style={{
+          marginTop: '151px',
+          marginBottom: '40px'
+        }}
+      />
+      <div className="flex-grow">
+        <div className="py-16">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <h1 className="text-4xl font-bold text-gray-900 sm:text-4xl">Inquiry Form</h1>
             </div>
-
-            {/* Right Column - Contact Form */}
-            <div className="pt-16 pr-8 min-h-full">
-              <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="grid grid-cols-2 gap-4">
-                  <div>
-                    <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">First Name</label>
-                    <input
-                      type="text"
-                      id="firstName"
-                      name="firstName"
-                      value={formData.firstName}
-                      onChange={handleChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm"
-                      required
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
-                    <input
-                      type="text"
-                      id="lastName"
-                      name="lastName"
-                      value={formData.lastName}
-                      onChange={handleChange}
-                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm"
-                      required
-                    />
-                  </div>
+            
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              {/* Left Column - Google Maps */}
+              <div className="w-full space-y-8">
+                <div className="w-full h-96">
+                  <iframe 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2486.4874936728197!2d123.90931022846817!3d10.323799061316175!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x33a999d870a37435%3A0x5a68a7f60d546f3!2sMeridian%20by%20AVENIR!5e1!3m2!1sen!2sph!4v1757426673647!5m2!1sen!2sph"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="rounded-lg shadow-lg"
+                  />
                 </div>
                 
-                <div className="grid grid-cols-2 gap-4">
+                {/* Contact Information */}
+                <div>
+                  <div className="space-y-4">
+                    <div className="flex items-start">
+                      <div className="flex-shrink-0 pt-1">
+                        <svg className="h-5 w-5 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                        </svg>
+                      </div>
+                      <div className="ml-3">
+                        <p className="text-sm text-gray-600">Unit 1601, Meridian, Golam Drive,<br/>Kasambagan 6000 Cebu City, Philippines</p>
+                      </div>
+                    </div>
+                    
+                    <div className="flex items-center">
+                      <svg className="h-5 w-5 text-gray-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                      </svg>
+                      <a href="tel:09177177103" className="ml-3 text-sm text-gray-600 hover:text-green-600">0917 717 7103</a>
+                    </div>
+                    
+                    <div className="flex items-center">
+                      <svg className="h-5 w-5 text-gray-400 flex-shrink-0" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                      </svg>
+                      <a href="mailto:hvidal@1028business.ph" className="ml-3 text-sm text-gray-600 hover:text-green-600">hvidal@1028business.ph</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              {/* Right Column - Contact Form */}
+              <div className="w-full">
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div>
+                      <label htmlFor="firstName" className="block text-sm font-medium text-gray-700 mb-1">First Name</label>
+                      <input
+                        type="text"
+                        id="firstName"
+                        name="firstName"
+                        value={formData.firstName}
+                        onChange={handleChange}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm"
+                        required
+                      />
+                    </div>
+                    <div>
+                      <label htmlFor="lastName" className="block text-sm font-medium text-gray-700 mb-1">Last Name</label>
+                      <input
+                        type="text"
+                        id="lastName"
+                        name="lastName"
+                        value={formData.lastName}
+                        onChange={handleChange}
+                        className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm"
+                        required
+                      />
+                    </div>
+                  </div>
+                  
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email</label>
                     <input
@@ -151,6 +182,7 @@ export default function Contact() {
                       required
                     />
                   </div>
+                  
                   <div>
                     <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">Phone</label>
                     <input
@@ -163,86 +195,106 @@ export default function Contact() {
                       required
                     />
                   </div>
-                </div>
-                
-                <div>
-                  <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-1">Address</label>
-                  <input
-                    type="text"
-                    id="address"
-                    name="address"
-                    value={formData.address}
-                    onChange={handleChange}
-                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm"
-                    required
-                  />
-                </div>
-                
-                <div>
-                  <div className="mb-4">
-                    <p className="text-sm font-medium text-gray-700 mb-2">Inquiry Type</p>
-                    <div className="flex flex-wrap gap-6">
-                      {['residential', 'commercial', 'industrial'].map((type) => (
-                        <div key={type} className="flex items-center">
-                          <button
-                            type="button"
-                            className={`w-5 h-5 rounded-full border-2 flex-shrink-0 transition-colors ${
-                              selectedInquiry === type 
-                                ? 'bg-green-600 border-green-600' 
-                                : 'border-gray-300 hover:border-green-500'
-                            }`}
-                            onClick={() => setSelectedInquiry(type)}
-                            aria-label={type}
-                          >
-                            <span className="sr-only">{type}</span>
-                          </button>
-                          <span className="ml-2 text-gray-700 capitalize">{type}</span>
-                        </div>
-                      ))}
+                  
+                  <div>
+                    <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-1">Address</label>
+                    <input
+                      type="text"
+                      id="address"
+                      name="address"
+                      value={formData.address}
+                      onChange={handleChange}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm"
+                      required
+                    />
+                  </div>
+                  
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">Inquiry Type</label>
+                    <div className="space-y-2">
+                      <label className="flex items-center">
+                        <input
+                          type="radio"
+                          name="inquiryType"
+                          value="residential"
+                          checked={selectedInquiry === 'residential'}
+                          onChange={() => setSelectedInquiry('residential')}
+                          className="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300"
+                        />
+                        <span className="ml-2 text-sm text-gray-700">Residential</span>
+                      </label>
+                      <label className="flex items-center">
+                        <input
+                          type="radio"
+                          name="inquiryType"
+                          value="commercial"
+                          checked={selectedInquiry === 'commercial'}
+                          onChange={() => setSelectedInquiry('commercial')}
+                          className="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300"
+                        />
+                        <span className="ml-2 text-sm text-gray-700">Commercial</span>
+                      </label>
+                      <label className="flex items-center">
+                        <input
+                          type="radio"
+                          name="inquiryType"
+                          value="industrial"
+                          checked={selectedInquiry === 'industrial'}
+                          onChange={() => setSelectedInquiry('industrial')}
+                          className="h-4 w-4 text-green-600 focus:ring-green-500 border-gray-300"
+                        />
+                        <span className="ml-2 text-sm text-gray-700">Industrial</span>
+                      </label>
                     </div>
                   </div>
-                  <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Message/Inquiry</label>
-                  <textarea
-                    id="message"
-                    name="message"
-                    rows={6}
-                    value={formData.message}
-                    onChange={handleChange}
-                    className="w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent"
-                    required
-                  ></textarea>
-                </div>
-                
-                <div className="flex flex-col items-center space-y-4">
-                  <button
-                    type="submit"
-                    className="text-white py-2 px-8 rounded-md transition-colors duration-200 font-medium disabled:opacity-70 flex items-center justify-center min-w-[120px]"
-                    style={{ backgroundColor: '#0F7346' }}
-                    disabled={isSubmitting}
-                  >
-                    {isSubmitting ? (
-                      <>
-                        <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
-                        Sending...
-                      </>
-                    ) : 'Submit'}
-                  </button>
                   
-                  {submitStatus.type && (
-                    <div className={`text-sm ${submitStatus.type === 'success' ? 'text-green-600' : 'text-red-600'}`}>
-                      {submitStatus.message}
+                  <div>
+                    <label htmlFor="message" className="block text-sm font-medium text-gray-700 mb-1">Message/Inquiry</label>
+                    <textarea
+                      id="message"
+                      name="message"
+                      rows={6}
+                      value={formData.message}
+                      onChange={handleChange}
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-green-500 focus:border-transparent text-sm"
+                      required
+                    />
+                  </div>
+                  
+                  <div className="pt-2">
+                    <div className="flex flex-col items-center">
+                      <button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className={`w-48 px-6 py-3 border border-transparent text-base font-medium rounded-md text-white ${
+                          isSubmitting ? 'bg-green-400' : 'bg-green-600 hover:bg-green-700'
+                        } focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500`}
+                      >
+                        {isSubmitting ? (
+                          <span className="flex items-center justify-center">
+                            <svg className="animate-spin -ml-1 mr-2 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                            </svg>
+                            Sending...
+                          </span>
+                        ) : 'Submit'}
+                      </button>
+                      
+                      {submitStatus.type && (
+                        <div className={`mt-3 text-sm ${submitStatus.type === 'success' ? 'text-green-600' : 'text-red-600'}`}>
+                          {submitStatus.message}
+                        </div>
+                      )}
                     </div>
-                  )}
-                </div>
-              </form>
+                  </div>
+                </form>
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <Footer className="mt-16" />
+      <Footer />
     </div>
   );
 }

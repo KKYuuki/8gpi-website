@@ -22,12 +22,19 @@ export default function ProjectsPage() {
     : projects.filter(project => project.category === activeCategory);
 
   return (
-    <div className="min-h-screen flex flex-col">
+    <div className="min-h-screen flex flex-col bg-white">
       <Navbar />
-      <div className="w-1/2 h-px bg-black mt-32 mx-auto"></div>
-      <main className="mt-4">
+      {/* Divider */}
+      <div 
+        className="w-full max-w-[1097px] h-px bg-black opacity-20 mx-auto"
+        style={{
+          marginTop: '151px',
+          marginBottom: '40px'
+        }}
+      />
+      <main className="flex-grow">
         {/* Hero Section */}
-        <div className="bg-white py-16">
+        <div className="py-16">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="text-center mb-12">
               <h2 className="text-3xl text-gray-900 sm:text-4xl">
