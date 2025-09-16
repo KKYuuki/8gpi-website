@@ -1,50 +1,49 @@
 import type { NextConfig } from "next";
-import { loadEnvConfig } from '@next/env';
 
-// Load environment variables
-const projectDir = process.cwd();
-loadEnvConfig(projectDir);
+const basePath = ''; // Set this if you need a base path (e.g., '/my-app')
 
 const nextConfig: NextConfig = {
-  // Configure static export
   output: 'export',
+  basePath,
+  assetPrefix: basePath,
   
-  // Base path for deployment (empty for root domain)
-  basePath: '',
-  
-  // Disable image optimization for static export
   images: {
     unoptimized: true,
+    domains: [],
   },
   
-  // Environment variables
-  env: {
-    RESEND_API_KEY: process.env.RESEND_API_KEY || '',
-    NEXT_PUBLIC_EMAIL_RECIPIENT: process.env.NEXT_PUBLIC_EMAIL_RECIPIENT || 'kennethcantillas@gmail.com',
-  },
-  
-  // Enable React Strict Mode
-  reactStrictMode: true,
-  
-  // Configure trailing slashes for static export
   trailingSlash: true,
   
-  // Disable TypeScript type checking during build
+  env: {
+    NEXT_PUBLIC_EMAIL_RECIPIENT: process.env.NEXT_PUBLIC_EMAIL_RECIPIENT || 'kennethcantillas@gmail.com',
+    NEXT_PUBLIC_BASE_URL: process.env.VERCEL_URL 
+      ? `https://${process.env.VERCEL_URL}`
+      : 'http://localhost:3000',
+  },
+  
+  reactStrictMode: true,
+  
   typescript: {
     ignoreBuildErrors: true,
   },
   
-  // Disable ESLint during build
   eslint: {
     ignoreDuringBuilds: true,
   },
   
   // Disable server-side rendering for static export
-  generateStaticParams: async () => ({}),
+  distDir: '.next',
   
-  // Disable the default static optimization
-  experimental: {
-    fallbackNodePolyfills: false,
+  // Ensure static export works with dynamic routes
+  exportPathMap: async function() {
+    return {
+      '/': { page: '/' },
+      '/about': { page: '/about' },
+      '/contact': { page: '/contact' },
+      '/products': { page: '/products' },
+      '/projects': { page: '/projects' },
+      // Add any other dynamic routes here
+    };
   },
 };
 

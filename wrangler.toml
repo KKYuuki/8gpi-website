@@ -1,13 +1,27 @@
 name = "8gpi-website"
-compatibility_date = "2023-10-02"
+main = ".open-next/server-functions/default/index.mjs"
+compatibility_date = "2025-09-16"
+compatibility_flags = ["nodejs_compat"]
 
-# For static site deployment
+[build]
+  command = "npm run build && npx open-next@latest build"
+  cwd = "."
+
 [site]
-bucket = ".vercel/output/static"
-entry-point = ".vercel/output/static"
+  bucket = ".open-next/static-files"
+
+[compatibility_flags]
+  nodejs_compat = true
+
+[env.production]
+  name = "8gpi-website-prod"
 
 # Environment variables
 # These should be set in your Cloudflare Pages dashboard
 # [vars]
 # RESEND_API_KEY = ""
 # NEXT_PUBLIC_EMAIL_RECIPIENT = ""
+
+# Disable observability logs
+[observability.logs]
+enabled = false
