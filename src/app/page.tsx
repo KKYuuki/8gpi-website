@@ -272,7 +272,7 @@ export default function Home() {
                   className="w-full h-full object-cover"
                   poster="/images/video-placeholder.jpg"
                 >
-                  <source src="/videos/rooftop-solar.mp4" type="video/mp4" />
+                  <source src="/images/WriteUp(Video).mp4" type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
               </div>
