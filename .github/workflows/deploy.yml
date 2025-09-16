@@ -48,3 +48,4 @@ jobs:
           environment: production
           workingDirectory: .
           wranglerVersion: 'latest'
+          command: 'deploy --env production'
