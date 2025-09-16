@@ -8,7 +8,9 @@ loadEnvConfig(projectDir);
 const nextConfig: NextConfig = {
   // Configure static export
   output: 'export',
-  distDir: 'out',
+  
+  // Base path for deployment (empty for root domain)
+  basePath: '',
   
   // Disable image optimization for static export
   images: {
@@ -17,7 +19,7 @@ const nextConfig: NextConfig = {
   
   // Environment variables
   env: {
-    RESEND_API_KEY: process.env.RESEND_API_KEY,
+    RESEND_API_KEY: process.env.RESEND_API_KEY || '',
     NEXT_PUBLIC_EMAIL_RECIPIENT: process.env.NEXT_PUBLIC_EMAIL_RECIPIENT || 'kennethcantillas@gmail.com',
   },
   
@@ -35,6 +37,14 @@ const nextConfig: NextConfig = {
   // Disable ESLint during build
   eslint: {
     ignoreDuringBuilds: true,
+  },
+  
+  // Disable server-side rendering for static export
+  generateStaticParams: async () => ({}),
+  
+  // Disable the default static optimization
+  experimental: {
+    fallbackNodePolyfills: false,
   },
 };
 

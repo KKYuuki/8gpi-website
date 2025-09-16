@@ -1,7 +1,13 @@
 name = "8gpi-website"
 compatibility_date = "2023-10-02"
 
-# For static site deployment
-[site]
-bucket = "./out"
-entry-point = "workers-site"
+# For Cloudflare Pages deployment
+[build]
+command = "npm run build && npm run export"
+publish = ".vercel/output/static"
+
+# Environment variables
+# These should be set in your Cloudflare Pages dashboard
+# [vars]
+# RESEND_API_KEY = ""
+# NEXT_PUBLIC_EMAIL_RECIPIENT = ""
