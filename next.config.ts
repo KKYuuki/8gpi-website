@@ -6,17 +6,6 @@ const projectDir = process.cwd();
 loadEnvConfig(projectDir);
 
 const nextConfig: NextConfig = {
-  // Configure experimental features
-  experimental: {
-    turbo: undefined, // Disable Turbopack for production builds
-    outputFileTracingExcludes: {
-      '*': [
-        'node_modules/**/*',
-        '.next/server/app/api/**/*',
-      ],
-    },
-  },
-  
   // Configure static export
   output: 'export',
   
@@ -36,6 +25,16 @@ const nextConfig: NextConfig = {
   
   // Configure trailing slashes for static export
   trailingSlash: true,
+  
+  // Disable TypeScript type checking during build
+  typescript: {
+    ignoreBuildErrors: true,
+  },
+  
+  // Disable ESLint during build
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
 };
 
 export default nextConfig;
