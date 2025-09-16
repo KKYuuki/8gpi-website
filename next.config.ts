@@ -6,15 +6,16 @@ const projectDir = process.cwd();
 loadEnvConfig(projectDir);
 
 const nextConfig: NextConfig = {
-  // Configure static export
+  // Configure static export for Cloudflare Pages
   output: 'export',
   
   // Base path for deployment (empty for root domain)
   basePath: '',
   
-  // Disable image optimization for static export
+  // Configure images for static export
   images: {
     unoptimized: true,
+    domains: [],
   },
   
   // Environment variables
@@ -29,18 +30,39 @@ const nextConfig: NextConfig = {
   // Configure trailing slashes for static export
   trailingSlash: true,
   
-  // Disable TypeScript type checking during build
+  // TypeScript configuration
   typescript: {
     ignoreBuildErrors: true,
   },
   
-  // Disable ESLint during build
+  // ESLint configuration
   eslint: {
     ignoreDuringBuilds: true,
   },
   
-  // Disable server-side rendering for static export
-  generateStaticParams: async () => ({}),
+  // Webpack configuration for Cloudflare Pages
+  webpack: (config, { isServer }) => {
+    // Fixes npm packages that depend on `node:` protocol (not available in browser)
+    if (!isServer) {
+      config.resolve.fallback = {
+        ...config.resolve.fallback,
+        fs: false,
+        net: false,
+        tls: false,
+        dns: false,
+        child_process: false,
+        dgram: false,
+        zlib: false,
+        http: false,
+        https: false,
+        stream: false,
+        crypto: false,
+        path: false,
+        os: false,
+      };
+    }
+    return config;
+  },
   
   // Disable the default static optimization
   experimental: {

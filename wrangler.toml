@@ -1,10 +1,11 @@
 name = "8gpi-website"
 compatibility_date = "2023-10-02"
+main = "_worker.js"
+compatibility_flags = [ "nodejs_compat" ]
 
-# For static site deployment
-[site]
-bucket = ".vercel/output/static"
-entry-point = ".vercel/output/static"
+[build]
+command = "npm run deploy"
+publish = ".vercel/static"
 
 # Environment variables
 # These should be set in your Cloudflare Pages dashboard
