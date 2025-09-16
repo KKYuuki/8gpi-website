@@ -13,7 +13,6 @@
   },
   "dependencies": {
     "@next/env": "^15.5.3",
-    "crypto-browserify": "^3.12.1",
     "next": "15.5.2",
     "react": "19.1.0",
     "react-dom": "19.1.0",
@@ -21,17 +20,11 @@
     "resend": "^6.0.3"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3",
-    "@opennextjs/cloudflare": "^1.8.2",
-    "@tailwindcss/postcss": "^4",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
-    "dotenv": "^17.2.2",
     "eslint": "^9",
     "eslint-config-next": "15.5.2",
-    "tailwindcss": "^4",
-    "typescript": "^5",
-    "webpack": "^5.101.3"
+    "typescript": "^5"
   }
 }
