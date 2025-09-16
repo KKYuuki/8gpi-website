@@ -8,6 +8,7 @@ loadEnvConfig(projectDir);
 const nextConfig: NextConfig = {
   // Configure static export
   output: 'export',
+  distDir: 'out',
   
   // Disable image optimization for static export
   images: {
