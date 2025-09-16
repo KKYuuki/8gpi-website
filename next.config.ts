@@ -6,13 +6,13 @@ const projectDir = process.cwd();
 loadEnvConfig(projectDir);
 
 const nextConfig: NextConfig = {
-  // Configure static export for Cloudflare Pages
-  output: 'export',
+  // Remove static export for OpenNext
+  output: 'standalone',
   
   // Base path for deployment (empty for root domain)
   basePath: '',
   
-  // Configure images for static export
+  // Configure images for Cloudflare
   images: {
     unoptimized: true,
     domains: [],
@@ -26,7 +26,7 @@ const nextConfig: NextConfig = {
   // Enable React Strict Mode
   reactStrictMode: true,
   
-  // Configure trailing slashes for static export
+  // Configure trailing slashes for consistency
   trailingSlash: true,
   
   // TypeScript configuration

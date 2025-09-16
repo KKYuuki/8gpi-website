@@ -8,7 +8,7 @@
     "preview": "npx serve .vercel/output/static",
     "start": "next start",
     "lint": "next lint",
-    "deploy": "npm run build && npx @cloudflare/next-on-pages",
+    "deploy": "npm run build && npx open-next@latest build",
     "cf-typegen": "wrangler types --env-interface CloudflareEnv env.d.ts"
   },
   "dependencies": {
