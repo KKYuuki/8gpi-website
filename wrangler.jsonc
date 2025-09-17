@@ -27,5 +27,12 @@
   "vars": {
     "RESEND_API_KEY": "re_84ESAoMa_tofBJbbTTU7nv5cMHeWg93Sm",
     "EMAIL_RECIPIENT": "kennethcantillas@gmail.com"
-  }
+  },
+  "routes": [
+    // Revert comment on deployment (Delete existing domain binding and worker before deploying)
+    // {
+    //   "pattern": "8gpi.com",
+    //   "custom_domain": true
+    // }
+  ]
 }
