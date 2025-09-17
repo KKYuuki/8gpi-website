@@ -1,36 +1,133 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# For Future Developers
 
-## Getting Started
+This is a guide for deploying NextJs projects to Clouflare Workers (using [OpenNext](https://opennext.js.org/cloudflare/get-started))
 
-First, run the development server:
+> Initial notes: Workers only support uploading files below 25MB, so if you have an asset that exceeds that, try out Handbrake (Video) or XnConvert (Images)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## Installation & Project Setup
+
+### Package Installation
+
+First of all, _cd_ to your project directory (where the package.json is found).
+
+Install **OpenNext** using your package manager
+
+```cli
+npm install @opennextjs/cloudflare@latest
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+> I recommend using pnpm, npm is tiring and uses too much space
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Also install wrangler and opennext types as a dev dependency so you can work on stuff and test it out
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```cli
+npm install --save-dev wrangler@latest @opennextjs/aws
+```
 
-## Learn More
+### Files
 
-To learn more about Next.js, take a look at the following resources:
+Create a `.dev.vars` file in your root directory (where this readme is located)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```
+NEXTJS_ENV=development
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+> The NEXTJS_ENV variable defines the environment to use when loading Next.js .env files. It defaults to "production" when not defined.
 
-## Deploy on Vercel
+[*Optional*] Create a `open-next.config.ts` in the root directory. You may skip this step as it can be generated if you preview locally.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```ts
+import { defineCloudflareConfig } from "@opennextjs/cloudflare"
+import r2IncrementalCache from "@opennextjs/cloudflare/overrides/incremental-cache/r2-incremental-cache"
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+export default defineCloudflareConfig({
+    incrementalCache: r2IncrementalCache,
+})
+```
+
+For Static Caching, create a ```_headers``` file in your ```/public``` directory
+```
+/_next/static/*
+  Cache-Control: public,max-age=31536000,immutable
+```
+
+## Configuration
+
+Create the _wrangler_ (`wrangler.jsonc`) file once again in the root directory
+
+```jsonc
+{
+    "$schema": "node_modules/wrangler/config-schema.json",
+    "main": ".open-next/worker.js",
+    "name": "my-app",
+    "compatibility_date": "2024-12-30",
+    "compatibility_flags": [
+        // Enable Node.js API
+        // see https://developers.cloudflare.com/workers/configuration/compatibility-flags/#nodejs-compatibility-flag
+        "nodejs_compat",
+        // Allow to fetch URLs in your app
+        // see https://developers.cloudflare.com/workers/configuration/compatibility-flags/#global-fetch-strictly-public
+        "global_fetch_strictly_public"
+    ],
+    "assets": {
+        "directory": ".open-next/assets",
+        "binding": "ASSETS"
+    },
+    "services": [
+        {
+            "binding": "WORKER_SELF_REFERENCE",
+            // The service should match the "name" of your worker
+            "service": "my-app"
+        }
+    ],
+    "r2_buckets": [
+        // Create a R2 binding with the binding name "NEXT_INC_CACHE_R2_BUCKET"
+        // {
+        //   "binding": "NEXT_INC_CACHE_R2_BUCKET",
+        //   "bucket_name": "<BUCKET_NAME>",
+        // },
+    ],
+    "vars": {
+        // Variables Here
+        "VARIABLE_NAME": "<VARIABLE-CONTENT"
+    },
+    "routes": [
+        // Domain Binding (Useful if we have access to the domain in our cloudflare dashboard)
+        // {
+        //   "pattern": "domain.com",
+        //   "custom_domain": true
+        // }
+    ]
+}
+```
+
+Update your ```package.json``` scripts to utilize **OpenNext**
+```json
+"build": "next build",
+"preview": "opennextjs-cloudflare build && opennextjs-cloudflare preview",
+"deploy": "opennextjs-cloudflare build && opennextjs-cloudflare deploy",
+"upload": "opennextjs-cloudflare build && opennextjs-cloudflare upload",
+"cf-typegen": "wrangler types --env-interface CloudflareEnv cloudflare-env.d.ts",
+```
+
+Then finally add ```.open-next``` to your ```.gitignore``` to prevent uploading the build output
+
+## Cloudflare Workers Deployment
+
+Once project is setup and no issues are present anymore, **push** to Github then set-up/create a new **worker** in cloudflare.
+
+Import the Repository you created then setup the **Build & deploy commands** for the worker
+
+**Build**
+
+```
+npx opennextjs-cloudflare build
+```
+
+**Deploy**
+
+```
+npx opennextjs-cloudflare deploy
+```
+
+After you do that, it should be done!
