@@ -43,6 +43,12 @@ const nextConfig: NextConfig = {
   experimental: {
     fallbackNodePolyfills: false,
   },
+  
+  // Compiler configuration
+  compiler: {
+    // Remove React-specific properties in production
+    reactRemoveProperties: true,
+  },
 };
 
 export default nextConfig;

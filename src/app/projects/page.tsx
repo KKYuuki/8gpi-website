@@ -54,7 +54,7 @@ export default function ProjectsPage() {
                     className="w-full h-full object-cover"
                     poster="/images/projects/1stprojcard.jpg"
                   >
-                    <source src="/images/ProjectVideo.mp4" type="video/mp4" />
+                    <source src="/images/ProjectVideo. cost of solar power Bacolod, solar panel installation Cebu, solar maintenance services Cebu City.mp4" type="video/mp4" />
                     Your browser does not support the video tag.
                   </video>
                 </div>

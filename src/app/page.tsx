@@ -18,9 +18,9 @@ export default function Home() {
     // Background images for the hero section
     const heroBackgrounds = useMemo(
         () => [
-            "/images/carousel(Background)/1stBG.png",
-            "/images/carousel(Background)/2ndBG.png",
-            "/images/carousel(Background)/3rdBG.png",
+            "/images/carousel(Background)/1stBG. cost of solar power Bacolod, solar panel installation Cebu, solar maintenance services Cebu City.png",
+            "/images/carousel(Background)/2ndBG. cost of solar power Bacolod, solar panel installation Cebu, solar maintenance services Cebu City.png",
+            "/images/carousel(Background)/3rdBG. cost of solar power Bacolod, solar panel installation Cebu, solar maintenance services Cebu City.png",
         ],
         []
     )
@@ -123,7 +123,7 @@ export default function Home() {
                         </div>
                         <div className='relative h-96 w-full rounded-xl overflow-hidden shadow-xl order-1 lg:order-2'>
                             <Image
-                                src='/images/WriteUp.jpg'
+                                src='/images/WriteUp. cost of solar power Bacolod, solar panel installation Cebu, solar maintenance services Cebu City.jpg'
                                 alt='Professional Solar Panel Installation Cebu - Cost of Solar Power Bacolod | Solar Maintenance Services Cebu City - facebook.com/8GenPower'
                                 fill
                                 className='object-cover'
@@ -205,7 +205,7 @@ export default function Home() {
                                     poster='/images/video-placeholder.jpg'
                                 >
                                     <source
-                                        src='/images/WriteUp(Video).mp4'
+                                        src='/images/WriteUp(Video). cost of solar power Bacolod, solar panel installation Cebu, solar maintenance services Cebu City.mp4'
                                         type='video/mp4'
                                     />
                                     Your browser does not support the video tag.

@@ -14,7 +14,7 @@ export default function Navbar() {
         <div className="flex-shrink-0">
           <Link href="/" className="block w-40 h-12 relative">
             <Image 
-              src="/images/Logo.png" 
+              src="/images/Logo. cost of solar power Bacolod, solar panel installation Cebu, solar maintenance services Cebu City.png" 
               alt="8GPI Logo - Solar Panel Installation Cebu | Cost of Solar Power Bacolod | Solar Maintenance Services Cebu City - facebook.com/8GenPower" 
               width={120}
               height={50}

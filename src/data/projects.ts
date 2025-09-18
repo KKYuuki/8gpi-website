@@ -3,56 +3,56 @@ export const projects = [
     id: 1,
     title: 'Residential Solar Installation',
     description: '150kVa Purely Grid Tie',
-    image: '/images/projects/1stprojcard.jpg',
+    image: '/images/projects/1stprojcard. cost of solar power Bacolod, solar panel installation Cebu, solar maintenance services Cebu City.jpg',
     location: 'Bacolod, Negros Oriental '
   },
   {
     id: 2,
     title: 'Commercial Rooftop Solar',
     description: '110kVa Purely Grid Tie',
-    image: '/images/projects/2ndprojcard.jpg',
+    image: '/images/projects/2ndprojcard. cost of solar power Bacolod, solar panel installation Cebu, solar maintenance services Cebu City.jpg',
     location: 'Bacolod, Negros Oriental'
   },
   {
     id: 3,
     title: 'Industrial Solar Farm',
     description: '50kVa',
-    image: '/images/projects/3rdprojcard.jpg',
+    image: '/images/projects/3rdprojcard. cost of solar power Bacolod, solar panel installation Cebu, solar maintenance services Cebu City.jpg',
     location: 'Bacolod, Negros Oriental'
   },
   {
     id: 4,
     title: 'Solar Carport Installation',
     description: '207kVa Purely Grid Tie',
-    image: '/images/projects/4thprojcard.jpg',
+    image: '/images/projects/4thprojcard. cost of solar power Bacolod, solar panel installation Cebu, solar maintenance services Cebu City.jpg',
     location: 'Bacolod, Negros Oriental'
   },
   {
     id: 5,
     title: 'Residential Solar Installation',
     description: '10kVa Purely Grid Tie',
-    image: '/images/projects/5thprojcard.jpg',
+    image: '/images/projects/5thprojcard. cost of solar power Bacolod, solar panel installation Cebu, solar maintenance services Cebu City.jpg',
     location: 'Cebu City, Cebu'
   },
   {
     id: 6,
     title: 'Residential Solar Installation',
     description: '60kVa Purely Grid Tie',
-    image: '/images/projects/6thprojcard.png',
+    image: '/images/projects/6thprojcard. cost of solar power Bacolod, solar panel installation Cebu, solar maintenance services Cebu City.png',
     location: 'Cebu City, Cebu'
   },
   {
     id: 7,
     title: 'Residential Solar Installation',
     description: '12kVa Hybrid Solar PV System',
-    image: '/images/projects/Bago City.jpg',
+    image: '/images/projects/Bago City. cost of solar power Bacolod, solar panel installation Cebu, solar maintenance services Cebu City.jpg',
     location: 'Bago City, Negros Oriental'
   },
   {
     id: 8,
     title: 'Residential Solar Installation',
     description: '16kVa Hybrid Solar PV System',
-    image: '/images/projects/Surigao Del Norte.jpg',
+    image: '/images/projects/Surigao Del Norte. cost of solar power Bacolod, solar panel installation Cebu, solar maintenance services Cebu City.jpg',
     location: 'Surigao Del Norte, General Luna, Siargao Island'
   }
 ];

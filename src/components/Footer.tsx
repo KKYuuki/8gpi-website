@@ -16,7 +16,7 @@ export default function Footer({ className = '' }: FooterProps) {
           <div className="space-y-6 text-center md:text-left max-w-xs">
             <div className="w-48 mb-4">
               <Image 
-                src="/images/Logo.png" 
+                src="/images/Logo. cost of solar power Bacolod, solar panel installation Cebu, solar maintenance services Cebu City.png" 
                 alt="8GPI - Solar Panel Installation Cebu | Cost of Solar Power Bacolod | Solar Maintenance Services Cebu City - facebook.com/8GenPower" 
                 width={192}
                 height={58}
@@ -71,7 +71,7 @@ export default function Footer({ className = '' }: FooterProps) {
                 title="Visit our Facebook page"
               >
                 <Image 
-                  src="/images/Footer_Logo/FacebookLogo.png" 
+                  src="/images/Footer_Logo/FacebookLogo. cost of solar power Bacolod, solar panel installation Cebu, solar maintenance services Cebu City.png" 
                   alt="8GPI on Facebook - Solar Panel Installation Cebu | Cost of Solar Power Bacolod | Solar Maintenance Services Cebu City - facebook.com/8GenPower" 
                   width={64}
                   height={64}
@@ -87,7 +87,7 @@ export default function Footer({ className = '' }: FooterProps) {
                 title="Message us on Viber: 0917 717 7103"
               >
                 <Image 
-                  src="/images/Footer_Logo/ViberLogo.png" 
+                  src="/images/Footer_Logo/ViberLogo. cost of solar power Bacolod, solar panel installation Cebu, solar maintenance services Cebu City.png" 
                   alt="Contact 8GPI on Viber - Solar Panel Installation Cebu | Cost of Solar Power Bacolod | Solar Maintenance Services Cebu City - facebook.com/8GenPower" 
                   width={64}
                   height={64}
@@ -103,7 +103,7 @@ export default function Footer({ className = '' }: FooterProps) {
                 title="Message us on WhatsApp: 0917 717 7103"
               >
                 <Image 
-                  src="/images/Footer_Logo/WhatsappLogo.png" 
+                  src="/images/Footer_Logo/WhatsappLogo. cost of solar power Bacolod, solar panel installation Cebu, solar maintenance services Cebu City.png" 
                   alt="Message 8GPI on WhatsApp - Solar Panel Installation Cebu | Cost of Solar Power Bacolod | Solar Maintenance Services Cebu City - facebook.com/8GenPower" 
                   width={64}
                   height={64}
