@@ -32,46 +32,73 @@ export default function LandingProjects({
         return () => window.removeEventListener("resize", updateProjectsPerPage)
     }, [updateProjectsPerPage])
 
-    // Handle navigation with infinite loop
+    // Handle navigation with smooth infinite loop
     const handleNextProject = useCallback((direction: number) => {
         if (isAnimating) return;
         
         setIsAnimating(true);
         setCurrentIndex(prev => {
             const totalProjects = projects.length;
-            let nextIndex = prev + (direction * projectsPerPage);
+            const nextIndex = prev + (direction * projectsPerPage);
             
             // Handle infinite scroll
             if (nextIndex >= totalProjects) {
-                return 0; // Loop back to start
+                // If going forward past the end, wrap to start with animation
+                return 0;
             } else if (nextIndex < 0) {
-                // Calculate the start index of the last complete page
-                const lastPageStart = totalProjects - (totalProjects % projectsPerPage || projectsPerPage);
-                return Math.max(0, lastPageStart);
+                // If going backward past the start, wrap to last page
+                return Math.max(0, totalProjects - (totalProjects % projectsPerPage || projectsPerPage));
             }
             
             return nextIndex;
         });
         
         // Reset animation flag after transition
-        setTimeout(() => setIsAnimating(false), 500);
+        const timer = setTimeout(() => setIsAnimating(false), 600); // Slightly longer to match animation duration
+        return () => clearTimeout(timer);
     }, [isAnimating, projects.length, projectsPerPage]);
     
-    // Auto-advance to next set of projects
+    // Auto-advance to next set of projects with pause on hover
     useEffect(() => {
         if (projects.length <= projectsPerPage) return;
         
-        const timer = setInterval(() => {
-            handleNextProject(1);
-        }, 5000); // Change slide every 5 seconds
+        let intervalId: NodeJS.Timeout;
+        const carousel = document.querySelector('.carousel-container');
         
-        return () => clearInterval(timer);
+        const startAutoAdvance = () => {
+            intervalId = setInterval(() => {
+                handleNextProject(1);
+            }, 5000); // Change slide every 5 seconds
+        };
+        
+        const pauseAutoAdvance = () => {
+            clearInterval(intervalId);
+        };
+        
+        startAutoAdvance();
+        
+        if (carousel) {
+            carousel.addEventListener('mouseenter', pauseAutoAdvance);
+            carousel.addEventListener('mouseleave', startAutoAdvance);
+            carousel.addEventListener('touchstart', pauseAutoAdvance);
+            carousel.addEventListener('touchend', startAutoAdvance);
+        }
+        
+        return () => {
+            clearInterval(intervalId);
+            if (carousel) {
+                carousel.removeEventListener('mouseenter', pauseAutoAdvance);
+                carousel.removeEventListener('mouseleave', startAutoAdvance);
+                carousel.removeEventListener('touchstart', pauseAutoAdvance);
+                carousel.removeEventListener('touchend', startAutoAdvance);
+            }
+        };
     }, [handleNextProject, projects.length, projectsPerPage]);
 
     // Calculate visible projects based on current index
     const getVisibleProjects = useCallback(() => {
         const totalProjects = projects.length;
-        let endIndex = currentIndex + projectsPerPage;
+        const endIndex = currentIndex + projectsPerPage;
         
         // Handle wrapping around the array
         if (endIndex > totalProjects) {
@@ -87,7 +114,7 @@ export default function LandingProjects({
 
 
     return (
-        <section className='py-20 overflow-hidden'>
+        <section className='py-20 overflow-hidden carousel-container'>
             <div className='max-w-7xl mx-auto px-6 lg:px-8'>
                 <div className='text-center mb-12'>
                     <h2 className='text-2xl md:text-3xl text-gray-600'>
@@ -110,7 +137,7 @@ export default function LandingProjects({
 
                     <div className='relative w-full overflow-hidden'>
                         <div className='w-full flex justify-center'>
-                            <AnimatePresence mode='popLayout' initial={false} custom={1}>
+                            <AnimatePresence mode='wait' initial={false} custom={1}>
                                 <motion.div 
                                     key={currentIndex}
                                     className='flex gap-6 py-4 px-2'
@@ -118,16 +145,23 @@ export default function LandingProjects({
                                     animate="center"
                                     exit="exit"
                                     custom={1}
+                                    transition={{
+                                        duration: 0.4,
+                                        ease: 'easeInOut'
+                                    }}
                                     variants={{
-                                        enter: { opacity: 0 },
-                                        center: { 
-                                            opacity: 1,
-                                            transition: { 
-                                                staggerChildren: 0.1,
-                                                delayChildren: 0.1
-                                            } 
+                                        enter: () => ({
+                                            x: 100,
+                                            opacity: 0
+                                        }),
+                                        center: {
+                                            x: 0,
+                                            opacity: 1
                                         },
-                                        exit: { opacity: 0 }
+                                        exit: () => ({
+                                            x: -100,
+                                            opacity: 0
+                                        })
                                     }}
                                 >
                                     {getVisibleProjects().map((project, index) => (
@@ -140,17 +174,15 @@ export default function LandingProjects({
                                             }}
                                             custom={index}
                                             variants={{
-                                                enter: { opacity: 0, x: 100 },
-                                                center: { 
-                                                    opacity: 1, 
-                                                    x: 0,
-                                                    transition: { 
-                                                        type: 'spring',
-                                                        stiffness: 300,
-                                                        damping: 30
-                                                    }
+                                                enter: { 
+                                                    opacity: 0
                                                 },
-                                                exit: { opacity: 0, x: -100 }
+                                                center: { 
+                                                    opacity: 1
+                                                },
+                                                exit: { 
+                                                    opacity: 0
+                                                }
                                             }}
                                         >
                                             <div className='group flex flex-col bg-white rounded-xl shadow-md overflow-hidden hover:shadow-xl transition-all duration-300 h-full border border-gray-100 mx-auto'>
