@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   title: "8GPI",
   description: "8Gen Power Inc. - Leading solar energy solutions for residential, commercial, and industrial clients.",
   icons: {
-    icon: '/8GPILogo.png'
+    icon: '/8GPILogo(Fixed).png'
   },
 };
 
