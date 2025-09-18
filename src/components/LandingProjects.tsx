@@ -32,61 +32,58 @@ export default function LandingProjects({
         return () => window.removeEventListener("resize", updateProjectsPerPage)
     }, [updateProjectsPerPage])
 
-    // Handle navigation
+    // Handle navigation with infinite loop
     const handleNextProject = useCallback((direction: number) => {
-        if (isAnimating) return
+        if (isAnimating) return;
         
-        setIsAnimating(true)
+        setIsAnimating(true);
         setCurrentIndex(prev => {
-            const totalProjects = projects.length
-            // Move by projectsPerPage (3) at a time
-            let nextIndex = prev + (direction * projectsPerPage)
+            const totalProjects = projects.length;
+            let nextIndex = prev + (direction * projectsPerPage);
             
-            // Handle bounds
-            if (nextIndex < 0) return 0
-            
-            // If moving forward and we're near the end, adjust to show the last group of 3
-            if (direction > 0 && nextIndex + projectsPerPage > totalProjects) {
-                // If we have at least 3 projects left, show them
-                if (totalProjects - nextIndex >= projectsPerPage) {
-                    return nextIndex
-                }
-                // Otherwise adjust to show the last group of 3
-                nextIndex = Math.max(0, totalProjects - projectsPerPage)
-                return nextIndex
+            // Handle infinite scroll
+            if (nextIndex >= totalProjects) {
+                return 0; // Loop back to start
+            } else if (nextIndex < 0) {
+                // Calculate the start index of the last complete page
+                const lastPageStart = totalProjects - (totalProjects % projectsPerPage || projectsPerPage);
+                return Math.max(0, lastPageStart);
             }
             
-            // If we're moving backward from the last group that has less than projectsPerPage items
-            if (direction < 0 && nextIndex + projectsPerPage > totalProjects) {
-                // Find the start of the previous complete group
-                const prevGroupStart = Math.max(0, totalProjects - (totalProjects % projectsPerPage || projectsPerPage))
-                return Math.max(0, prevGroupStart - projectsPerPage)
-            }
-            
-            return nextIndex
-        })
+            return nextIndex;
+        });
         
         // Reset animation flag after transition
-        setTimeout(() => setIsAnimating(false), 500)
-    }, [isAnimating, projects.length, projectsPerPage])
+        setTimeout(() => setIsAnimating(false), 500);
+    }, [isAnimating, projects.length, projectsPerPage]);
+    
+    // Auto-advance to next set of projects
+    useEffect(() => {
+        if (projects.length <= projectsPerPage) return;
+        
+        const timer = setInterval(() => {
+            handleNextProject(1);
+        }, 5000); // Change slide every 5 seconds
+        
+        return () => clearInterval(timer);
+    }, [handleNextProject, projects.length, projectsPerPage]);
 
     // Calculate visible projects based on current index
     const getVisibleProjects = useCallback(() => {
-        const totalProjects = projects.length
-        const endIndex = currentIndex + projectsPerPage
+        const totalProjects = projects.length;
+        let endIndex = currentIndex + projectsPerPage;
         
-        // If we're at the last group and it has less than projectsPerPage items
+        // Handle wrapping around the array
         if (endIndex > totalProjects) {
-            // If we can show a complete group of projectsPerPage by moving the start index back
-            if (totalProjects - projectsPerPage >= 0) {
-                return projects.slice(totalProjects - projectsPerPage, totalProjects)
-            }
-            // Otherwise show all remaining projects
-            return projects.slice(currentIndex, totalProjects)
+            const overflow = endIndex - totalProjects;
+            return [
+                ...projects.slice(currentIndex, totalProjects),
+                ...projects.slice(0, overflow)
+            ];
         }
         
-        return projects.slice(currentIndex, endIndex)
-    }, [currentIndex, projects, projectsPerPage])
+        return projects.slice(currentIndex, endIndex);
+    }, [currentIndex, projects, projectsPerPage]);
 
 
     return (
@@ -105,12 +102,7 @@ export default function LandingProjects({
                     {/* Navigation Arrows */}
                     <button
                         onClick={() => handleNextProject(-1)}
-                        disabled={currentIndex === 0}
-                        className={`absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full shadow-md flex items-center justify-center transition-colors focus:outline-none ${
-                            currentIndex === 0 
-                                ? 'bg-gray-200 cursor-not-allowed' 
-                                : 'bg-white hover:bg-gray-100 cursor-pointer'
-                        }`}
+                        className='absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full shadow-md flex items-center justify-center transition-colors focus:outline-none bg-white hover:bg-gray-100 cursor-pointer'
                         aria-label='Previous projects'
                     >
                         <FiChevronLeft className='w-5 h-5 md:w-6 md:h-6 text-gray-700' />
@@ -193,12 +185,7 @@ export default function LandingProjects({
 
                     <button
                         onClick={() => handleNextProject(1)}
-                        disabled={currentIndex + projectsPerPage >= projects.length}
-                        className={`absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full shadow-md flex items-center justify-center transition-colors focus:outline-none ${
-                            currentIndex + projectsPerPage >= projects.length
-                                ? 'bg-gray-200 cursor-not-allowed' 
-                                : 'bg-white hover:bg-gray-100 cursor-pointer'
-                        }`}
+                        className='absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 md:w-12 md:h-12 rounded-full shadow-md flex items-center justify-center transition-colors focus:outline-none bg-white hover:bg-gray-100 cursor-pointer'
                         aria-label='Next projects'
                     >
                         <FiChevronRight className='w-5 h-5 md:w-6 md:h-6 text-gray-700' />
