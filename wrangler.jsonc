@@ -30,9 +30,9 @@
   },
   "routes": [
     // Revert comment on deployment (Delete existing domain binding and worker before deploying)
-    // {
-    //   "pattern": "8gpi.com",
-    //   "custom_domain": true
-    // }
+    {
+      "pattern": "8gpi.com",
+      "custom_domain": true
+    }
   ]
 }
