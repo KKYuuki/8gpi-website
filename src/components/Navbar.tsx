@@ -26,16 +26,16 @@ export default function Navbar() {
         
         {/* Desktop Navigation */}
         <div className="hidden md:flex space-x-15">
-          <Link href="/products" className="text-black hover:text-green-600 py-2 font-medium">
+          <Link href="/products" className="text-black hover:text-green-600 py-2 font-medium text-lg">
             Products
           </Link>
-          <Link href="/projects" className="text-black hover:text-green-600 py-2 font-medium">
+          <Link href="/projects" className="text-black hover:text-green-600 py-2 font-medium text-lg">
             Projects
           </Link>
-          <Link href="/about" className="text-black hover:text-green-600 py-2 font-medium">
+          <Link href="/about" className="text-black hover:text-green-600 py-2 font-medium text-lg">
             About Us
           </Link>
-          <Link href="/contact" className="text-black hover:text-green-600 py-2 font-medium">
+          <Link href="/contact" className="text-black hover:text-green-600 py-2 font-medium text-lg">
             Contact Us
           </Link>
         </div>

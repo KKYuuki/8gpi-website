@@ -1,16 +1,30 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-// Hardcoded values for testing
-const resendApiKey = 're_KGp6mfvW_99orYPEwxsc1uZe6Fn1DGCCA';
-const recipientEmail = '8gpi@1028business.ph';
+// Get environment variables - use process.env directly in the function
+// to avoid throwing during build time
+let resend: Resend | null = null;
+let isConfigured = false;
 
-console.log('Using hardcoded Resend API Key and email for testing');
-
-// Initialize Resend with the API key
-const resend = new Resend(resendApiKey);
+// Only initialize Resend if we have the required environment variables
+if (process.env.RESEND_API_KEY && process.env.EMAIL_RECIPIENT) {
+  resend = new Resend(process.env.RESEND_API_KEY);
+  isConfigured = true;
+}
 
 export async function POST(request: Request) {
+  // Early return if not properly configured
+  if (!isConfigured || !resend) {
+    console.error('Email service is not properly configured');
+    return NextResponse.json(
+      { 
+        success: false, 
+        message: 'Email service is not available at the moment. Please try again later.' 
+      },
+      { status: 503 }
+    );
+  }
+
   console.log('Contact form submission received');
   
   try {
@@ -36,12 +50,18 @@ export async function POST(request: Request) {
     }
 
     // Always log the email sending attempt
+    const recipientEmail = process.env.EMAIL_RECIPIENT || '8gpi@1028business.ph';
     console.log('Attempting to send email to:', recipientEmail);
 
-    console.log('Sending email to:', recipientEmail);
+    const fromEmail = '8GPI Inquiry Form <no-reply@8gpi.com>';
+    
+    // Ensure recipientEmail is a string and wrap in array
+    const recipients = [recipientEmail].filter(Boolean) as string[];
+    
+    console.log(`Sending email from: ${fromEmail} to: ${recipients.join(', ')}`);
     const { data, error } = await resend.emails.send({
-      from: '8GPI Inquiry Form <no-reply@8gpi.com>',
-      to: recipientEmail,
+      from: fromEmail,
+      to: recipients,
       replyTo: email,
       subject: `New ${inquiryType || 'General'} Inquiry from ${firstName} ${lastName}`,
       html: `
