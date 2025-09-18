@@ -1,15 +1,15 @@
 export const products = [
   {
     id: 1,
-    name: 'Hybrid Solar Pv System',
-    description: 'A Hybrid Solar PV System combines solar panels with battery storage and a grid connection. It allows homeowners or businesses to use solar power during the day, store excess energy in batteries, and draw from the grid when needed—ensuring continuous power supply even during blackouts.',
-    image: '/images/product/Hybrid Solar Pv System. cost of solar power Bacolod, solar panel installation Cebu, solar maintenance services Cebu City.png'
+    name: 'On-Grid Solar PV System',
+    description: 'An On-Grid Solar PV System is directly connected to the utility grid without battery storage. It uses solar power during the day and automatically sources electricity from the grid at night or during low sunlight.',
+    image: '/images/product/On-Grid Solar PV System. cost of solar power Bacolod, solar panel installation Cebu, solar maintenance services Cebu City.png'
   },
   {
     id: 2,
-    name: 'Net Metering Assitance',
-    description: 'Net Metering Assistance is the support service provided to help clients apply for and process their net metering applications with the utility company. This allows them to export excess solar energy to the grid and receive credits on their electricity bill, maximizing savings from their solar investment.',
-    image: '/images/product/Net Metering Assitance. cost of solar power Bacolod, solar panel installation Cebu, solar maintenance services Cebu City.png'
+    name: 'Hybrid Solar Pv System',
+    description: 'A Hybrid Solar PV System combines solar panels with battery storage and a grid connection. It allows homeowners or businesses to use solar power during the day, store excess energy in batteries, and draw from the grid when needed—ensuring continuous power supply even during blackouts.',
+    image: '/images/product/Hybrid Solar Pv System. cost of solar power Bacolod, solar panel installation Cebu, solar maintenance services Cebu City.png'
   },
   {
     id: 3,
@@ -19,8 +19,8 @@ export const products = [
   },
   {
     id: 4,
-    name: 'On-Grid Solar PV System',
-    description: 'An On-Grid Solar PV System is directly connected to the utility grid without battery storage. It uses solar power during the day and automatically sources electricity from the grid at night or during low sunlight.',
-    image: '/images/product/On-Grid Solar PV System. cost of solar power Bacolod, solar panel installation Cebu, solar maintenance services Cebu City.png'
+    name: 'Net Metering Assitance',
+    description: 'Net Metering Assistance is the support service provided to help clients apply for and process their net metering applications with the utility company. This allows them to export excess solar energy to the grid and receive credits on their electricity bill, maximizing savings from their solar investment.',
+    image: '/images/product/Net Metering Assitance. cost of solar power Bacolod, solar panel installation Cebu, solar maintenance services Cebu City.png'
   }
 ];

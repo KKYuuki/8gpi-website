@@ -35,8 +35,8 @@ export default function Home() {
 
     // Hero static content
     const heroContent = {
-        title: "Switch on the Sun",
-        description: "Premium Solar Panel Solutions for a Sustainable Future",
+        title: "Electricity Cost Burn",
+        description: "Switch on the Sun",
         buttonText: "Contact us",
         buttonLink: "/contact",
     }

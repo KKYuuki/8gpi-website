@@ -59,9 +59,9 @@ export default function Footer({ className = '' }: FooterProps) {
           </div>
           
           {/* Connect With Us */}
-          <div className="text-center md:text-left w-full">
-            <h3 className="text-xl font-semibold mb-4">CONNECT WITH US</h3>
-            <div className="flex mt-4">
+          <div className="w-full">
+            <h3 className="text-xl font-semibold mb-4 text-center md:text-left">CONNECT WITH US</h3>
+            <div className="flex justify-center md:justify-start mt-4">
               <a 
                 href="https://www.facebook.com/8GenPower" 
                 target="_blank" 
@@ -73,22 +73,6 @@ export default function Footer({ className = '' }: FooterProps) {
                 <Image 
                   src="/images/Footer_Logo/FacebookLogo. cost of solar power Bacolod, solar panel installation Cebu, solar maintenance services Cebu City.png" 
                   alt="8GPI on Facebook - Solar Panel Installation Cebu | Cost of Solar Power Bacolod | Solar Maintenance Services Cebu City - facebook.com/8GenPower" 
-                  width={64}
-                  height={64}
-                  className="object-contain w-full h-full"
-                />
-              </a>
-              <a 
-                href="viber://chat?number=+639177177103" 
-                target="_blank" 
-                rel="noopener noreferrer nofollow"
-                className="w-16 h-16 flex items-center justify-center relative hover:opacity-80 transition-opacity mx-3 mt-2"
-                aria-label="Viber"
-                title="Message us on Viber: 0917 717 7103"
-              >
-                <Image 
-                  src="/images/Footer_Logo/ViberLogo. cost of solar power Bacolod, solar panel installation Cebu, solar maintenance services Cebu City.png" 
-                  alt="Contact 8GPI on Viber - Solar Panel Installation Cebu | Cost of Solar Power Bacolod | Solar Maintenance Services Cebu City - facebook.com/8GenPower" 
                   width={64}
                   height={64}
                   className="object-contain w-full h-full"

@@ -12,14 +12,14 @@ export default function AboutPage() {
       <section 
         className="relative h-screen flex items-center justify-center overflow-hidden pt-24 lg:pt-0"
         style={{
-          backgroundImage: 'url(/images/aboutuspage/AboutUsBG.jpg)',
+          backgroundImage: `url(${encodeURI('/images/aboutuspage/AboutUsBG. cost of solar power Bacolod, solar panel installation Cebu, solar maintenance services Cebu City.jpg')})`,
           backgroundSize: 'cover',
           backgroundPosition: 'center',
           backgroundRepeat: 'no-repeat',
           position: 'relative',
         }}
       >
-        <div className="absolute inset-0 bg-black/60 z-0"></div>
+        <div className="absolute inset-0 bg-black/30 z-0"></div>
         <div className="relative z-10 text-center px-4">
           <h1 className="text-4xl md:text-6xl font-bold text-black mb-4">About 8Gen Power Inc.</h1>
           <h2 className="text-2xl md:text-3xl font-bold text-black mb-6">Solar PV Solutions</h2>
@@ -34,7 +34,7 @@ export default function AboutPage() {
             <div className="order-1">
               <div className="relative h-96 w-full rounded-lg overflow-hidden shadow-lg">
                 <Image
-                  src="/images/aboutuspage/WriteUpAboutUs.jpg"
+                  src="/images/aboutuspage/WriteUpAboutUs. cost of solar power Bacolod, solar panel installation Cebu, solar maintenance services Cebu City.jpg"
                   alt="8Gen Power Team - Expert Solar Panel Installation Cebu | Affordable Cost of Solar Power Bacolod | Professional Solar Maintenance Services Cebu City - facebook.com/8GenPower"
                   fill
                   className="object-cover"
@@ -58,28 +58,28 @@ export default function AboutPage() {
 
       {/* Divider */}
       <div className="w-full py-8">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="h-0.5 bg-black w-full"></div>
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="h-0.5 bg-gray-200 w-full"></div>
         </div>
       </div>
 
       {/* Section 3: Mission & Vision */}
       <section className="py-16 bg-white">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-36 text-center">
             {/* Mission */}
             <div className="p-4">
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Mission</h3>
-              <p className="text-gray-600">
-                Empowering Filipinos to cut energy costs with clean and innovative solar solutions.
+              <h3 className="text-3xl font-bold text-gray-900 mb-4">Our Mission</h3>
+              <p className="text-gray-800">
+              To help individuals and businesses take control of their energy future by delivering cost-saving solar solutions, exceptional service, and sustainable innovation— all while building a cleaner, greener world for generations to come.
               </p>
             </div>
             
             {/* Vision */}
             <div className="p-4">
-              <h3 className="text-2xl font-bold text-gray-900 mb-4">Our Vision</h3>
-              <p className="text-gray-600">
-                A future where every community harnesses solar power efficiently and responsibly.
+              <h3 className="text-3xl font-bold text-gray-900 mb-4">Our Vision</h3>
+              <p className="text-gray-800">
+              To be the trusted leader in sustainable solar energy solutions across the Visayas and Mindanao Regions, empowering communities and businesses to harness the power of the sun efficiently, responsibly, and for a brighter, greener future.
               </p>
             </div>
           </div>
@@ -93,7 +93,7 @@ export default function AboutPage() {
           <div className="flex justify-center">
             <div className="w-40 h-40 relative">
               <Image
-                src="/images/aboutuspage/CEAAPILogo.png"
+                src="/images/aboutuspage/CEAAPILogo. cost of solar power Bacolod, solar panel installation Cebu, solar maintenance services Cebu City.png"
                 alt="CEAAPI Certified - Trusted Solar Panel Installation Cebu | Best Cost of Solar Power Bacolod | Reliable Solar Maintenance Services Cebu City - facebook.com/8GenPower"
                 fill
                 className="object-contain"
@@ -117,7 +117,7 @@ export default function AboutPage() {
                 <div className="flex justify-center mb-4">
                   <div className="w-16 h-16 relative">
                     <Image
-                      src="/images/aboutuspage/handshake.png"
+                      src="/images/aboutuspage/handshake. cost of solar power Bacolod, solar panel installation Cebu, solar maintenance services Cebu City.png"
                       alt="Client Focused Solar Solutions - Expert Solar Panel Installation Cebu | Affordable Cost of Solar Power Bacolod | Professional Solar Maintenance Services Cebu City - facebook.com/8GenPower"
                       fill
                       className="object-contain"
@@ -134,7 +134,7 @@ export default function AboutPage() {
                 <div className="flex justify-center mb-4">
                   <div className="w-16 h-16 relative">
                     <Image
-                      src="/images/aboutuspage/energy_savings_leaf.png"
+                      src="/images/aboutuspage/energy_savings_leaf. cost of solar power Bacolod, solar panel installation Cebu, solar maintenance services Cebu City.png"
                       alt="Sustainable Energy Solutions - Eco-friendly Solar Panel Installation Cebu | Cost-effective Solar Power Bacolod | Green Solar Maintenance Services Cebu City - facebook.com/8GenPower"
                       fill
                       className="object-contain"
@@ -151,7 +151,7 @@ export default function AboutPage() {
                 <div className="flex justify-center mb-4">
                   <div className="w-16 h-16 relative">
                     <Image
-                      src="/images/aboutuspage/handyman.png"
+                      src="/images/aboutuspage/handyman. cost of solar power Bacolod, solar panel installation Cebu, solar maintenance services Cebu City.png"
                       alt="Professional Solar Panel Installation & Support Cebu | Reliable Cost of Solar Power Bacolod | Expert Solar Maintenance Services Cebu City - facebook.com/8GenPower"
                       fill
                       className="object-contain"
