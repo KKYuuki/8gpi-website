@@ -1,17 +1,12 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Remove static export for API routes to work
-  // output: 'export',
-  
-  // Base path for deployment (empty for root domain)
+  reactStrictMode: true,
   basePath: '',
   
   // Image optimization configuration
   images: {
     unoptimized: true,
-    // Define allowed image qualities (required for Next.js 16+)
-    qualities: [25, 50, 75, 100],
   },
   
   // Environment variables
@@ -20,34 +15,28 @@ const nextConfig: NextConfig = {
     NEXT_PUBLIC_EMAIL_RECIPIENT: process.env.NEXT_PUBLIC_EMAIL_RECIPIENT || '8gpi@1028business.ph',
   },
   
-  // Enable React Strict Mode
-  reactStrictMode: true,
-  
-  // Configure trailing slashes for static export
+  // Configure trailing slashes
   trailingSlash: true,
   
-  // Disable TypeScript type checking during build
+  // TypeScript configuration
   typescript: {
-    ignoreBuildErrors: true,
+    ignoreBuildErrors: false,
   },
   
-  // Disable ESLint during build
+  // ESLint configuration
   eslint: {
-    ignoreDuringBuilds: true,
+    ignoreDuringBuilds: false,
   },
   
-  // Disable server-side rendering for static export
-  generateStaticParams: async () => ({}),
+  // Output configuration for Cloudflare
+  output: 'export',
   
-  // Disable the default static optimization
-  experimental: {
-    fallbackNodePolyfills: false,
-  },
+  // Disable source maps in production for faster builds
+  productionBrowserSourceMaps: false,
   
   // Compiler configuration
   compiler: {
-    // Remove React-specific properties in production
-    reactRemoveProperties: true,
+    reactRemoveProperties: process.env.NODE_ENV === 'production',
   },
 };
 
