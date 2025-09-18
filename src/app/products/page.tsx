@@ -69,7 +69,7 @@ export default function ProductsPage() {
                     className="w-full h-full object-cover"
                     poster="/images/product/video-placeholder.jpg"
                   >
-                    <source src="/images/Short Video. cost of solar power Bacolod, solar panel installation Cebu, solar maintenance services Cebu City.mp4" type="video/mp4" />
+                    <source src="/Short Video. Cost Of Solar Power Bacolod, Solar Panel Installation Cebu, Solar Maintenance Services Cebu City.mp4" type="video/mp4" />
                     Your browser does not support the video tag.
                   </video>
                 </div>
