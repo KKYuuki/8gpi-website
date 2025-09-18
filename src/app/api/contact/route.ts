@@ -1,11 +1,14 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-// Hardcoded values for testing
-const resendApiKey = 're_KGp6mfvW_99orYPEwxsc1uZe6Fn1DGCCA';
-const recipientEmail = '8gpi@1028business.ph';
+// Get environment variables
+const resendApiKey = process.env.RESEND_API_KEY;
+const recipientEmail = process.env.EMAIL_RECIPIENT;
 
-console.log('Using hardcoded Resend API Key and email for testing');
+// Validate environment variables
+if (!resendApiKey || !recipientEmail) {
+  throw new Error('Missing required environment variables: RESEND_API_KEY and/or EMAIL_RECIPIENT');
+}
 
 // Initialize Resend with the API key
 const resend = new Resend(resendApiKey);
@@ -38,10 +41,15 @@ export async function POST(request: Request) {
     // Always log the email sending attempt
     console.log('Attempting to send email to:', recipientEmail);
 
-    console.log('Sending email to:', recipientEmail);
+    const fromEmail = '8GPI Inquiry Form <no-reply@8gpi.com>';
+    
+    // Ensure recipientEmail is a string and wrap in array
+    const recipients = [recipientEmail].filter(Boolean) as string[];
+    
+    console.log(`Sending email from: ${fromEmail} to: ${recipients.join(', ')}`);
     const { data, error } = await resend.emails.send({
-      from: '8GPI Inquiry Form <no-reply@8gpi.com>',
-      to: recipientEmail,
+      from: fromEmail,
+      to: recipients,
       replyTo: email,
       subject: `New ${inquiryType || 'General'} Inquiry from ${firstName} ${lastName}`,
       html: `
