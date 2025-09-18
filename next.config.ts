@@ -1,53 +1,50 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Remove static export for API routes to work
-  // output: 'export',
+  // Enable server components
+  reactStrictMode: true,
   
-  // Base path for deployment (empty for root domain)
+  // Base path for deployment
   basePath: '',
   
   // Image optimization configuration
   images: {
     unoptimized: true,
-    // Define allowed image qualities (required for Next.js 16+)
-    qualities: [25, 50, 75, 100],
+    // Remove qualities as it's not needed with unoptimized: true
   },
   
   // Environment variables
   env: {
     NEXT_PUBLIC_RESEND_API_KEY: process.env.NEXT_PUBLIC_RESEND_API_KEY || '',
-    NEXT_PUBLIC_EMAIL_RECIPIENT: process.env.NEXT_PUBLIC_EMAIL_RECIPIENT || 'kennethcantillas@gmail.com',
+    NEXT_PUBLIC_EMAIL_RECIPIENT: process.env.NEXT_PUBLIC_EMAIL_RECIPIENT || '8gpi@1028business.ph',
   },
   
-  // Enable React Strict Mode
-  reactStrictMode: true,
-  
-  // Configure trailing slashes for static export
+  // Configure trailing slashes
   trailingSlash: true,
   
-  // Disable TypeScript type checking during build
+  // TypeScript configuration
   typescript: {
-    ignoreBuildErrors: true,
+    ignoreBuildErrors: false, // Keep this as false to catch type errors
   },
   
-  // Disable ESLint during build
+  // ESLint configuration
   eslint: {
-    ignoreDuringBuilds: true,
+    ignoreDuringBuilds: false, // Keep this as false to catch lint errors
   },
   
-  // Disable server-side rendering for static export
-  generateStaticParams: async () => ({}),
+  // Output configuration
+  output: 'standalone',
   
-  // Disable the default static optimization
-  experimental: {
-    fallbackNodePolyfills: false,
-  },
+  // Disable source maps in production for faster builds
+  productionBrowserSourceMaps: false,
+  
+  // Enable SWC minification
+  swcMinify: true,
   
   // Compiler configuration
   compiler: {
     // Remove React-specific properties in production
-    reactRemoveProperties: true,
+    reactRemoveProperties: process.env.NODE_ENV === 'production',
   },
 };
 
