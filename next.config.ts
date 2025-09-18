@@ -1,21 +1,19 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Enable server components
   reactStrictMode: true,
-  
-  // Base path for deployment
   basePath: '',
   
   // Image optimization configuration
   images: {
     unoptimized: true,
-    // Remove qualities as it's not needed with unoptimized: true
   },
   
   // Environment variables
   env: {
-    NEXT_PUBLIC_RESEND_API_KEY: process.env.NEXT_PUBLIC_RESEND_API_KEY || '',
+    // These will be available at build time
+    RESEND_API_KEY: process.env.RESEND_API_KEY,
+    EMAIL_RECIPIENT: process.env.EMAIL_RECIPIENT || '8gpi@1028business.ph',
     NEXT_PUBLIC_EMAIL_RECIPIENT: process.env.NEXT_PUBLIC_EMAIL_RECIPIENT || '8gpi@1028business.ph',
   },
   
@@ -24,26 +22,22 @@ const nextConfig: NextConfig = {
   
   // TypeScript configuration
   typescript: {
-    ignoreBuildErrors: false, // Keep this as false to catch type errors
+    ignoreBuildErrors: false,
   },
   
   // ESLint configuration
   eslint: {
-    ignoreDuringBuilds: false, // Keep this as false to catch lint errors
+    ignoreDuringBuilds: false,
   },
   
-  // Output configuration
-  output: 'standalone',
+  // Output configuration for Cloudflare
+  output: 'export',
   
   // Disable source maps in production for faster builds
   productionBrowserSourceMaps: false,
   
-  // Enable SWC minification
-  swcMinify: true,
-  
   // Compiler configuration
   compiler: {
-    // Remove React-specific properties in production
     reactRemoveProperties: process.env.NODE_ENV === 'production',
   },
 };

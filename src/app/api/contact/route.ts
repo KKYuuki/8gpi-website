@@ -1,19 +1,30 @@
 import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
-// Get environment variables
-const resendApiKey = process.env.RESEND_API_KEY;
-const recipientEmail = process.env.EMAIL_RECIPIENT;
+// Get environment variables - use process.env directly in the function
+// to avoid throwing during build time
+let resend: Resend | null = null;
+let isConfigured = false;
 
-// Validate environment variables
-if (!resendApiKey || !recipientEmail) {
-  throw new Error('Missing required environment variables: RESEND_API_KEY and/or EMAIL_RECIPIENT');
+// Only initialize Resend if we have the required environment variables
+if (process.env.RESEND_API_KEY && process.env.EMAIL_RECIPIENT) {
+  resend = new Resend(process.env.RESEND_API_KEY);
+  isConfigured = true;
 }
 
-// Initialize Resend with the API key
-const resend = new Resend(resendApiKey);
-
 export async function POST(request: Request) {
+  // Early return if not properly configured
+  if (!isConfigured || !resend) {
+    console.error('Email service is not properly configured');
+    return NextResponse.json(
+      { 
+        success: false, 
+        message: 'Email service is not available at the moment. Please try again later.' 
+      },
+      { status: 503 }
+    );
+  }
+
   console.log('Contact form submission received');
   
   try {
@@ -39,6 +50,7 @@ export async function POST(request: Request) {
     }
 
     // Always log the email sending attempt
+    const recipientEmail = process.env.EMAIL_RECIPIENT || '8gpi@1028business.ph';
     console.log('Attempting to send email to:', recipientEmail);
 
     const fromEmail = '8GPI Inquiry Form <no-reply@8gpi.com>';
