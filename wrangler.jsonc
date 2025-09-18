@@ -26,7 +26,7 @@
   ],
   "vars": {
     "RESEND_API_KEY": "re_KGp6mfvW_99orYPEwxsc1uZe6Fn1DGCCA",
-    "EMAIL_RECIPIENT": "kennethcantillas@gmail.com"
+    "EMAIL_RECIPIENT": "8gpi@1028business.ph"
   },
   "routes": [
     // Revert comment on deployment (Delete existing domain binding and worker before deploying)

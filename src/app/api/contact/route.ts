@@ -2,8 +2,8 @@ import { NextResponse } from 'next/server';
 import { Resend } from 'resend';
 
 // Hardcoded values for testing
-const resendApiKey = 're_84ESAoMa_tofBJbbTTU7nv5cMHeWg93Sm';
-const recipientEmail = 'kennethcantillas@gmail.com';
+const resendApiKey = 're_KGp6mfvW_99orYPEwxsc1uZe6Fn1DGCCA';
+const recipientEmail = '8gpi@1028business.ph';
 
 console.log('Using hardcoded Resend API Key and email for testing');
 
@@ -40,7 +40,7 @@ export async function POST(request: Request) {
 
     console.log('Sending email to:', recipientEmail);
     const { data, error } = await resend.emails.send({
-      from: '8GPI Contact Form <onboarding@resend.dev>',
+      from: '8GPI Inquiry Form <no-reply@8gpi.com>',
       to: recipientEmail,
       replyTo: email,
       subject: `New ${inquiryType || 'General'} Inquiry from ${firstName} ${lastName}`,
