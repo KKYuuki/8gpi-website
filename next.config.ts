@@ -29,10 +29,16 @@ const nextConfig: NextConfig = {
   },
   
   // Output configuration for Cloudflare
-  output: 'export',
+  // Using 'standalone' output for better compatibility with Cloudflare
+  output: 'standalone',
   
   // Disable source maps in production for faster builds
   productionBrowserSourceMaps: false,
+  
+  // Enable experimental features for better Cloudflare compatibility
+  experimental: {
+    serverComponentsExternalPackages: ['@opennextjs/cloudflare'],
+  },
   
   // Compiler configuration
   compiler: {
