@@ -89,10 +89,10 @@ export default function Home() {
                 {/* Static Content - Centered */}
                 <div className='relative z-20 w-full max-w-7xl mx-auto flex flex-col items-center justify-center h-full text-center px-4 sm:px-6 lg:px-8 pt-24 lg:pt-0'>
                     <div className='w-full px-4 sm:px-6 lg:px-8'>
-                        <h1 className='text-5xl md:text-7xl font-bold text-black mb-6'>
+                        <h1 className='text-2xl md:text-3xl font-bold text-black mb-4'>
                             {heroContent.title}
                         </h1>
-                        <p className='text-2xl md:text-3xl text-black mb-8 max-w-3xl mx-auto'>
+                        <p className='text-5xl md:text-7xl text-black mb-8 max-w-3xl mx-auto'>
                             {heroContent.description}
                         </p>
                         <a
@@ -185,13 +185,10 @@ export default function Home() {
                     <div className='flex flex-col lg:flex-row-reverse items-center gap-12'>
                         <div className='lg:w-1/2'>
                             <h2 className='text-3xl md:text-4xl font-bold text-gray-900 mb-6'>
-                                Earn Back Your Investment in Just 2 Years
+                                Smart Investment
                             </h2>
                             <p className='text-lg text-gray-600 mb-8'>
-                                With 8GPI&apos;s efficient solar PV systems,
-                                customers typically recover their investment
-                                within 2 years — thanks to drastically reduced
-                                electricity bills and long-term energy savings.
+                                Lasting Returns 8GPI solar solutions cut electricity costs and maximize ROI over time.
                             </p>
                         </div>
                         <div className='lg:w-1/2 w-full'>
